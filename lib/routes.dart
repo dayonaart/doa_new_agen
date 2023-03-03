@@ -6,15 +6,54 @@ import 'package:mobilenew/pages/onboarding.dart';
 import 'package:mobilenew/pages/opening_account.dart';
 import 'package:mobilenew/pages/opening_tnc.dart';
 import 'package:mobilenew/pages/preregister.dart';
+import 'package:mobilenew/pages/take_camera_ktp.dart';
+
+enum ROUTE {
+  root,
+  preRegister,
+  openingAccount,
+  openingTnc,
+  inputPhoneNumber,
+  accountType,
+  ktpRegistration,
+  takeCameraKtp,
+}
+
+extension Page on ROUTE {
+  String get name {
+    switch (this) {
+      case ROUTE.root:
+        return '/';
+      case ROUTE.preRegister:
+        return '/preRegister';
+      case ROUTE.openingAccount:
+        return '/openingAccount';
+      case ROUTE.openingTnc:
+        return '/openingTnc';
+      case ROUTE.inputPhoneNumber:
+        return '/inputPhoneNumber';
+      case ROUTE.accountType:
+        return '/accountType';
+      case ROUTE.ktpRegistration:
+        return '/ktpRegistration';
+      case ROUTE.takeCameraKtp:
+        return '/takeCameraKtp';
+      default:
+        return "";
+    }
+  }
+}
 
 List<GetPage> get routePage {
   return [
     GetPage(name: '/', page: () => OnBoarding()),
-    GetPage(name: '/preRegister', page: () => const PreRegister()),
-    GetPage(name: '/openingAccount', page: () => const OpeningAccount()),
-    GetPage(name: '/openingTnc', page: () => OpeningTnc()),
-    GetPage(name: '/inputPhoneNumber', page: () => InputPhoneNumber()),
-    GetPage(name: '/account_type', page: () => AccountType()),
-    GetPage(name: '/ktpRegistration', page: () => KtpRegistration()),
+    GetPage(name: ROUTE.preRegister.name, page: () => const PreRegister()),
+    GetPage(
+        name: ROUTE.openingAccount.name, page: () => const OpeningAccount()),
+    GetPage(name: ROUTE.openingTnc.name, page: () => OpeningTnc()),
+    GetPage(name: ROUTE.inputPhoneNumber.name, page: () => InputPhoneNumber()),
+    GetPage(name: ROUTE.accountType.name, page: () => AccountType()),
+    GetPage(name: ROUTE.ktpRegistration.name, page: () => KtpRegistration()),
+    GetPage(name: ROUTE.takeCameraKtp.name, page: () => TakeCameraKtp()),
   ];
 }

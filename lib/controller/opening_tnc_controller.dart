@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/dummies_data/dummies.dart';
+import 'package:mobilenew/routes.dart';
 import 'dart:math' as math;
 
 import 'package:mobilenew/style/colors.dart';
 
 class OpeningTncController extends GetxController
     with GetTickerProviderStateMixin {
+  ScrollController scController = ScrollController();
   late List<AnimationController> expandController;
   late List<Rx<Animation<double>>> animation;
   late List<RxBool> isOpen;
@@ -36,14 +38,24 @@ class OpeningTncController extends GetxController
 
   void Function() openingTnc(int i) {
     return () {
-      isOpen[i].value = !isOpen[i].value;
-      if (isOpen[i].value) {
-        arrowAngle[i].value = 5 / math.pi;
-        expandController[i].forward();
-      } else {
-        arrowAngle[i].value = 15 / math.pi;
-        expandController[i].reverse();
-      }
+      isOpen = List.generate(isOpen.length, (b) {
+        if (i == b) {
+          if (isOpen[b] == RxBool(true)) {
+            arrowAngle[b].value = 15 / math.pi;
+            expandController[b].reverse();
+            return RxBool(false);
+          } else {
+            arrowAngle[b].value = 5 / math.pi;
+            expandController[b].forward();
+            return RxBool(true);
+          }
+        } else {
+          arrowAngle[b].value = 15 / math.pi;
+          expandController[b].reverse();
+          return RxBool(false);
+        }
+      });
+      scrollToDown();
     };
   }
 
@@ -60,8 +72,16 @@ class OpeningTncController extends GetxController
       return null;
     }
     return () async {
-      await Get.toNamed('inputPhoneNumber');
+      await Get.toNamed(ROUTE.inputPhoneNumber.name);
     };
+  }
+
+  void scrollToDown() {
+    scController.animateTo(
+      Get.height,
+      duration: const Duration(seconds: 2),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   @override
@@ -76,5 +96,11 @@ class OpeningTncController extends GetxController
   void onInit() {
     super.onInit();
     _prepareAnimations();
+  }
+
+  @override
+  void onReady() {
+    scrollToDown();
+    super.onReady();
   }
 }

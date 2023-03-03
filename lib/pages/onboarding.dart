@@ -76,15 +76,15 @@ class OnBoardingBody extends StatelessWidget {
             children: [
               Text(
                 "Tunggu Apalagi!",
-                style: textStyleW600(fontSize: 18, fontColor: BLUE_DARK),
+                style: textStyleW600(fontSize: 18, fontColor: BLUE_TEXT),
               ),
               Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "Nikmati kemudahan dengan BNI Agen46",
-                    style: textStyleW500(fontSize: 12, fontColor: BLUE_DARK)),
+                    style: textStyleW500(fontSize: 12, fontColor: BLUE_TEXT)),
                 TextSpan(
                     text: "#Melayani Paling Dekat",
-                    style: textStyleW700(fontColor: BLUE_DARK, fontSize: 16))
+                    style: textStyleW700(fontColor: BLUE_TEXT, fontSize: 16))
               ]))
             ],
           ),
@@ -100,11 +100,11 @@ class OnBoardingBody extends StatelessWidget {
                         TextSpan(
                             text: "Belum punya akun BNI Agen46 ?",
                             style: textStyleW500(
-                                fontColor: BLUE_DARK, fontSize: 10)),
+                                fontColor: BLUE_TEXT, fontSize: 10)),
                         TextSpan(
                             text: "\nDaftar Sekarang",
                             style: textStyleW500(
-                                fontSize: 17, fontColor: BLUE_DARK))
+                                fontSize: 17, fontColor: BLUE_TEXT))
                       ]),
                       textAlign: TextAlign.center,
                     ),

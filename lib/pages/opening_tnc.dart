@@ -16,6 +16,7 @@ class OpeningTnc extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: APPBAR(onPressed: () => Get.back(), title: "Syarat & Ketentuan"),
       body: SingleChildScrollView(
+        controller: _controller.scController,
         child: TncBody(),
       ),
       bottomNavigationBar: TncAgreementButton(),

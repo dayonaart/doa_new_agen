@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
-import 'package:mobilenew/widget/widgets.dart';
 
 enum AccountCardName {
   kartuDebitBNIAgen46GPNCombo1,
@@ -155,6 +155,7 @@ class AccountTypeController extends GetxController
   @override
   void onReady() {
     _mController.startProgressAnim();
+    scrollToDown();
     super.onReady();
   }
 
@@ -199,6 +200,7 @@ class AccountTypeController extends GetxController
         showFullFeatureArrowAngle.value = 5.0;
         showFullFeatureBtnTitle.value = "Sembunyikan";
         expandController.forward();
+        scrollToDown();
       } else {
         showFullFeatureBtnTitle.value = "Selengkapnya";
         showFullFeatureArrowAngle.value = 15.0;
@@ -218,13 +220,15 @@ class AccountTypeController extends GetxController
 
   void Function()? next() {
     return () async {
-      await DIALOG_HELPER("UNDER DEVELOP");
-      // await Get.toNamed("ktpRegistration");
+      await Get.toNamed(ROUTE.ktpRegistration.name);
     };
   }
 
   void scrollToDown() {
-    print(scController.position.maxScrollExtent);
-    scController.jumpTo(3000);
+    scController.animateTo(
+      Get.height,
+      duration: const Duration(seconds: 2),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 }

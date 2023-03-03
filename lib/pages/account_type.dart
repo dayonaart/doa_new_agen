@@ -223,17 +223,21 @@ class AccountList extends StatelessWidget {
     return CarouselSlider(
         items: List.generate(3, (i) {
           return Obx(() {
-            return Opacity(
-              opacity: _controller.corouselIndex.value == i ? 1 : 0.4,
-              child: Image.asset(
-                "assets/account_type/account${i + 1}.png",
-                filterQuality: FilterQuality.high,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Opacity(
+                opacity: _controller.corouselIndex.value == i ? 1 : 0.4,
+                child: Image.asset(
+                  "assets/account_type/account${i + 1}.png",
+                  filterQuality: FilterQuality.high,
+                ),
               ),
             );
           });
         }),
         options: CarouselOptions(
             height: 137,
+            // padEnds: true,
             viewportFraction: 0.55,
             enableInfiniteScroll: true,
             onPageChanged: _controller.onPageChanged()));

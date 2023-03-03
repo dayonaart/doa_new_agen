@@ -40,6 +40,8 @@ dependencies:
   dio: ^5.0.1
   carousel_slider: ^4.2.1 
   drop_down_list: ^0.0.4
+  google_mlkit_text_recognition: ^0.5.0
+  camera: ^0.10.3+2
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +74,7 @@ flutter:
     - assets/country_flag/
     - assets/account_type/
     - assets/registration/
+    - assets/take_camera_ktp/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

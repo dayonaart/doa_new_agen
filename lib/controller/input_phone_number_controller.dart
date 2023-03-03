@@ -3,6 +3,7 @@ import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/widget/widgets.dart';
 
@@ -94,7 +95,7 @@ class InputPhoneNumberController extends GetxController {
       return () async {
         print(
             "{'number':${numberEditingController.text},'country':${selectedCountry.value}}");
-        await Get.toNamed('account_type');
+        await Get.toNamed(ROUTE.accountType.name);
       };
     } else {
       return null;

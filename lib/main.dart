@@ -5,9 +5,11 @@ import 'package:mobilenew/routes.dart';
 
 void main() {
   runApp(GetMaterialApp(
+      defaultTransition: Transition.size,
+      transitionDuration: const Duration(seconds: 1),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'montserrat'),
-      initialRoute: '/',
+      initialRoute: ROUTE.root.name,
       getPages: routePage,
       unknownRoute: GetPage(
         name: '/notfound',
