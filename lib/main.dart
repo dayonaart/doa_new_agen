@@ -7,7 +7,7 @@ void main() {
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'montserrat'),
-      initialRoute: '/inputPhoneNumber',
+      initialRoute: '/',
       getPages: routePage,
       unknownRoute: GetPage(
         name: '/notfound',
