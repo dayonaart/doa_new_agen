@@ -2,7 +2,9 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/pages/take_camera_ktp.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -11,15 +13,14 @@ class TakeCameraKtpController extends GetxController
     with WidgetsBindingObserver {
   late List<CameraDescription> _cameras;
   late CameraController? camController;
-  RxBool isCameraReady = false.obs;
+  bool isCameraReady = false;
   final MainController _mController = Get.find();
-  String cameraHelperDescription =
-      "Pastikan posisi & dan klik ambil foto. Pastikan foto terlihat dengan jelas.";
+
   List<TextSpan> get cameraHelperDescriptionWidget {
-    return cameraHelperDescription.split("").map((e) {
+    return TakeCameraKtpWord.pastikanPosisi.text.split("").map((e) {
       if (RegExp(r'[&]', caseSensitive: true).hasMatch(e)) {
         return TextSpan(
-            text: "KTP asli pada area yang tersedia",
+            text: TakeCameraKtpWord.ktpAsli.text,
             style: textStyleW600(fontSize: 12, fontColor: BLUE_TEXT));
       } else {
         return TextSpan(
@@ -28,10 +29,11 @@ class TakeCameraKtpController extends GetxController
     }).toList();
   }
 
-  void _initCameraController() async {
-    camController = CameraController(_cameras[0], ResolutionPreset.high);
+  Future<void> _initCameraController(CameraDescription description) async {
+    camController = CameraController(description, ResolutionPreset.high);
     await camController?.initialize().then((_) {
-      isCameraReady.value = (camController != null);
+      isCameraReady = (camController != null);
+      update();
     }).catchError((Object e) {
       if (e is CameraException) {
         switch (e.code) {
@@ -47,12 +49,17 @@ class TakeCameraKtpController extends GetxController
   }
 
   void Function() changeCameraDirection() {
-    return () {
-      if (camController?.description.name == "1") {
-        onNewCameraSelected(_cameras[0]);
+    return () async {
+      final lensDirection = camController?.description.lensDirection;
+      CameraDescription newDescription;
+      if (lensDirection == CameraLensDirection.front) {
+        newDescription = _cameras.firstWhere((description) =>
+            description.lensDirection == CameraLensDirection.back);
       } else {
-        onNewCameraSelected(_cameras[1]);
+        newDescription = _cameras.firstWhere((description) =>
+            description.lensDirection == CameraLensDirection.front);
       }
+      await _initCameraController(newDescription);
     };
   }
 
@@ -60,7 +67,32 @@ class TakeCameraKtpController extends GetxController
     return () async {
       var _xFile = await camController?.takePicture();
       if (_xFile != null) {
-        await Get.to(PreviewKtp(imagePath: _xFile.path));
+        _mController.setKtpFilePath(_xFile.path);
+        Get.to(PreviewKtp());
+        await BOTTOM_DIALOG_CONFIRMATION(
+            btnAccTitle: TakeCameraKtpWord.fotoSudahSesuai.text,
+            btnRejectTitle: TakeCameraKtpWord.fotoUlang.text,
+            topTitle: Expanded(
+              child: Text.rich(TextSpan(children: [
+                TextSpan(
+                    text: TakeCameraKtpWord.pastikanFoto.text,
+                    style: textStyleW500(fontSize: 12)),
+                TextSpan(
+                    text: TakeCameraKtpWord.sudahSesuai.text,
+                    style: textStyleW600(fontSize: 12))
+              ])),
+            ),
+            onAccept: () async {
+              await camController?.dispose();
+              Get.back();
+              Get.back();
+              Get.back();
+              await Get.toNamed(ROUTE.registrationForm.name);
+            },
+            onReject: () {
+              Get.back();
+              Get.back();
+            });
       } else {
         return;
       }
@@ -96,9 +128,9 @@ class TakeCameraKtpController extends GetxController
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     _mController.startProgressAnim();
-    _initCameraController();
+    await _initCameraController(_cameras.first);
     super.onReady();
   }
 

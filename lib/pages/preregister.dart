@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobilenew/const_path.dart';
+import 'package:mobilenew/enum.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -18,16 +21,16 @@ class PreRegister extends StatelessWidget {
             icon: Icons.arrow_back,
             centerTitle: false,
             onPressed: () => Get.back(),
-            title: "Pendaftaran BNI Agen46"),
+            title: PreregisterWord.pendaftaranBNIAgen46.text),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/preregister/preregister.png'),
+              Image.asset(preregisterAssets),
               const SizedBox(height: 20),
               Text(
-                "Apakah Anda sudah memiliki Rekening Taplus Bisnis BNI Agen46 ?",
+                PreregisterWord.apakahAndaSudahMemilikiRekening.text,
                 style: textStyleW500(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
@@ -41,12 +44,12 @@ class PreRegister extends StatelessWidget {
               Expanded(
                   child: OUTLINE_BUTTON(
                       onPressed: () async =>
-                          await Get.toNamed('openingAccount'),
+                          await Get.toNamed(ROUTE.openingAccount.name),
                       sideColor: ORANGE,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
-                          "Belum punya",
+                          PreregisterWord.belumPunya.text,
                           style: textStyleW600(fontSize: 14, fontColor: ORANGE),
                         ),
                       ))),
@@ -57,7 +60,7 @@ class PreRegister extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(
-                          "Sudah punya",
+                          PreregisterWord.sudahPunya.text,
                           style: textStyleW600(
                               fontSize: 14, fontColor: Colors.white),
                         ),

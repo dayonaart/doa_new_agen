@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobilenew/const_path.dart';
+import 'package:mobilenew/enum.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -11,7 +14,9 @@ class OpeningAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return SAFE_AREA(
         child: SCAFFOLD(
-      appBar: APPBAR(onPressed: () => Get.back(), title: "Buka Rekening"),
+      appBar: APPBAR(
+          onPressed: () => Get.back(),
+          title: OpeningAccountWord.bukaRekening.text),
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -21,14 +26,12 @@ class OpeningAccount extends StatelessWidget {
               Container(
                   decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: PINK_LIGHT),
-                  child: Image.asset(
-                      'assets/opening_account/opening_account.png')),
+                  child: Image.asset(openingAccountAssets)),
               const SizedBox(height: 24),
-              Text("Ayo buka tabungan digital bisnis BNI Agen46 sekarang juga!",
+              Text(OpeningAccountWord.ayoBukaTabungan.text,
                   style: textStyleW600(fontSize: 16),
                   textAlign: TextAlign.center),
-              Text(
-                  "Jika Anda sudah mempunyai rekening tabungan bisnis BNI Agen46 , silakan lakukan pendaftaran pada\nhalaman sebelumnya dan pilih “Sudah Punya",
+              Text(OpeningAccountWord.jikaAndaSudahMempunyai.text,
                   style: textStyleW500(fontSize: 14),
                   textAlign: TextAlign.center),
               const SizedBox(height: 58),
@@ -43,22 +46,21 @@ class OpeningAccount extends StatelessWidget {
                       child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const ImageIcon(
-                                AssetImage('assets/opening_account/lamp.png'),
-                                color: BLUE_TEXT),
+                            ImageIcon(AssetImage(lampAssets), color: BLUE_TEXT),
                             Expanded(
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                        "Untuk kelancaran pembukaan tabungan, siapkan\ndahulu:",
+                                        OpeningAccountWord
+                                            .untukKelancaranPembukaan.text,
                                         style: textStyleW600(
                                             fontSize: 12,
                                             fontColor: BLUE_TEXT)),
                                     Text.rich(TextSpan(children: [
                                       TextSpan(
                                           text:
-                                              "• e-KTP (wajib) & NPWP (bila ada)\n• Pulsa / paket data untuk pengiriman OTP\n• Kertas & alat tulis untuk foto tanda tangan",
+                                              OpeningAccountWord.eKtpWajib.text,
                                           style: textStyleW600(
                                               fontSize: 12,
                                               fontColor: BLUE_TEXT)),
@@ -75,11 +77,11 @@ class OpeningAccount extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                "Lanjut",
+                OpeningAccountWord.lanjut.text,
                 style: textStyleW600(fontSize: 16, fontColor: Colors.white),
               ),
             ),
-            onPressed: () async => await Get.toNamed('openingTnc')),
+            onPressed: () async => await Get.toNamed(ROUTE.openingTnc.name)),
       ),
     ));
   }

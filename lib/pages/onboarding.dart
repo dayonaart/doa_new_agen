@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/const_path.dart';
 import 'package:mobilenew/controller/onboarding_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -15,28 +16,23 @@ class OnBoarding extends StatelessWidget {
     return SAFE_AREA(
       child: SCAFFOLD(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: SizedBox(
-            height: Get.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CarouselSlider(
-                    items: List.generate(4, (i) {
-                      return Image.asset(
-                        onboarding1,
-                        filterQuality: FilterQuality.high,
-                      );
-                    }),
-                    options: CarouselOptions(
-                        enableInfiniteScroll: false,
-                        height: 271,
-                        viewportFraction: 1,
-                        onPageChanged: _controller.onPageChanged())),
-                OnBoardingBody(),
-              ],
-            ),
-          ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CarouselSlider(
+                items: List.generate(4, (i) {
+                  return Image.asset(
+                    onboarding1Assets,
+                    filterQuality: FilterQuality.high,
+                  );
+                }),
+                options: CarouselOptions(
+                    enableInfiniteScroll: false,
+                    height: 271,
+                    viewportFraction: 1,
+                    onPageChanged: _controller.onPageChanged())),
+            OnBoardingBody(),
+          ],
         ),
       ),
     );
@@ -75,15 +71,15 @@ class OnBoardingBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Tunggu Apalagi!",
+                OnBoardingWord.tungguApalagi.text,
                 style: textStyleW600(fontSize: 18, fontColor: BLUE_TEXT),
               ),
               Text.rich(TextSpan(children: [
                 TextSpan(
-                    text: "Nikmati kemudahan dengan BNI Agen46",
+                    text: OnBoardingWord.nikmatiKemudahanDenganBNIAgen46.text,
                     style: textStyleW500(fontSize: 12, fontColor: BLUE_TEXT)),
                 TextSpan(
-                    text: "#Melayani Paling Dekat",
+                    text: OnBoardingWord.melayaniPalingDekat.text,
                     style: textStyleW700(fontColor: BLUE_TEXT, fontSize: 16))
               ]))
             ],
@@ -98,11 +94,11 @@ class OnBoardingBody extends StatelessWidget {
                     child: Text.rich(
                       TextSpan(children: [
                         TextSpan(
-                            text: "Belum punya akun BNI Agen46 ?",
+                            text: OnBoardingWord.belumPunyaAkunBNIAgen46.text,
                             style: textStyleW500(
                                 fontColor: BLUE_TEXT, fontSize: 10)),
                         TextSpan(
-                            text: "\nDaftar Sekarang",
+                            text: OnBoardingWord.daftarSekarang.text,
                             style: textStyleW500(
                                 fontSize: 17, fontColor: BLUE_TEXT))
                       ]),
@@ -114,7 +110,7 @@ class OnBoardingBody extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Text(
-                      "Masuk",
+                      OnBoardingWord.masuk.text,
                       style:
                           textStyleW700(fontSize: 18, fontColor: Colors.white),
                     ),

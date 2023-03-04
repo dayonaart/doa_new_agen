@@ -3,6 +3,7 @@ import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -11,7 +12,7 @@ class InputPhoneNumberController extends GetxController {
   final TextEditingController numberEditingController = TextEditingController();
   RxBool numberValidation = false.obs;
   RxBool helperValidation = false.obs;
-  RxString selectedCountry = 'Negara'.obs;
+  RxString selectedCountry = InputPhoneNumberWord.negara.text.obs;
   final _mController = Get.put(MainController());
 
   @override
@@ -21,14 +22,14 @@ class InputPhoneNumberController extends GetxController {
   }
 
   final List<String> items = [
-    'Indonesia',
-    'Singapore',
-    'Thailand',
-    'Brunei',
-    'India',
-    'China',
-    'Vietnam',
-    'USA',
+    InputPhoneNumberWord.indonesia.text,
+    InputPhoneNumberWord.singapore.text,
+    InputPhoneNumberWord.thailand.text,
+    InputPhoneNumberWord.brunei.text,
+    InputPhoneNumberWord.india.text,
+    InputPhoneNumberWord.china.text,
+    InputPhoneNumberWord.vietnam.text,
+    InputPhoneNumberWord.uSA.text,
   ];
   List<SelectedListItem> get selectedListItem {
     return List.generate(items.length, (i) => SelectedListItem(name: items[i]));
@@ -42,16 +43,16 @@ class InputPhoneNumberController extends GetxController {
     return () {
       DropDownState(
         DropDown(
-          bottomSheetTitle: const Text(
-            "Pilih Negara",
-            style: TextStyle(
+          bottomSheetTitle: Text(
+            InputPhoneNumberWord.pilihNegara.text,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20.0,
             ),
           ),
-          submitButtonChild: const Text(
-            'Selesai',
-            style: TextStyle(
+          submitButtonChild: Text(
+            InputPhoneNumberWord.selesai.text,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -83,7 +84,7 @@ class InputPhoneNumberController extends GetxController {
     return IconButton(
       onPressed: () async {
         await DIALOG_HELPER(
-            "Pastikan nomor Handphone yang Anda masukan sesuai format\ncontoh : 8123456789");
+            InputPhoneNumberWord.pastikanNomorHandphoneDialog.text);
       },
       icon: const Icon(Icons.help, color: ORANGE),
       iconSize: 20,
@@ -91,7 +92,8 @@ class InputPhoneNumberController extends GetxController {
   }
 
   void Function()? next() {
-    if (numberValidation.value && selectedCountry.value != "Negara") {
+    if (numberValidation.value &&
+        selectedCountry.value != InputPhoneNumberWord.negara.text) {
       return () async {
         print(
             "{'number':${numberEditingController.text},'country':${selectedCountry.value}}");

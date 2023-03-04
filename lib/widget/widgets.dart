@@ -29,8 +29,6 @@ Scaffold SCAFFOLD({
     appBar: appBar,
     body: body,
     bottomNavigationBar: bottomNavigationBar,
-    // floatingActionButton: bottomNavigationBar,
-    // bottomSheet: bottomNavigationBar,
   );
 }
 
@@ -159,4 +157,66 @@ Future DIALOG_HELPER(String text) {
       ],
     ),
   ));
+}
+
+Future<void> BOTTOM_DIALOG_CONFIRMATION({
+  String? btnAccTitle,
+  String? btnRejectTitle,
+  Widget? topTitle,
+  void Function()? onAccept,
+  void Function()? onReject,
+}) async {
+  await Get.bottomSheet(
+      Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Card(
+                color: BLUE_LIGHT,
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 17.67, vertical: 16),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.help, color: BLUE_TEXT),
+                      const SizedBox(width: 9.67),
+                      topTitle ??
+                          Text("Top Title",
+                              style: textStyleW600(
+                                  fontSize: 12, fontColor: BLUE_TEXT)),
+                    ],
+                  ),
+                ),
+              ),
+              BUTTON(
+                  radiusCircular: 999,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      btnAccTitle ?? "Accept",
+                      style:
+                          textStyleW600(fontSize: 16, fontColor: Colors.white),
+                    ),
+                  ),
+                  onPressed: onAccept),
+              const SizedBox(height: 16),
+              OUTLINE_BUTTON(
+                  radiusCircular: 999,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Text(btnRejectTitle ?? "Reject",
+                        style: textStyleW600(fontSize: 16, fontColor: ORANGE)),
+                  ),
+                  onPressed: onReject)
+            ],
+          ),
+        ),
+      ),
+      isDismissible: false);
 }

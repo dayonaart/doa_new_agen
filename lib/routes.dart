@@ -6,10 +6,11 @@ import 'package:mobilenew/pages/onboarding.dart';
 import 'package:mobilenew/pages/opening_account.dart';
 import 'package:mobilenew/pages/opening_tnc.dart';
 import 'package:mobilenew/pages/preregister.dart';
+import 'package:mobilenew/pages/registration_form.dart';
 import 'package:mobilenew/pages/take_camera_ktp.dart';
 
 enum ROUTE {
-  root,
+  onBoarding,
   preRegister,
   openingAccount,
   openingTnc,
@@ -17,12 +18,13 @@ enum ROUTE {
   accountType,
   ktpRegistration,
   takeCameraKtp,
+  registrationForm,
 }
 
 extension Page on ROUTE {
   String get name {
     switch (this) {
-      case ROUTE.root:
+      case ROUTE.onBoarding:
         return '/';
       case ROUTE.preRegister:
         return '/preRegister';
@@ -38,6 +40,8 @@ extension Page on ROUTE {
         return '/ktpRegistration';
       case ROUTE.takeCameraKtp:
         return '/takeCameraKtp';
+      case ROUTE.registrationForm:
+        return '/registrationForm';
       default:
         return "";
     }
@@ -46,7 +50,7 @@ extension Page on ROUTE {
 
 List<GetPage> get routePage {
   return [
-    GetPage(name: '/', page: () => OnBoarding()),
+    GetPage(name: ROUTE.onBoarding.name, page: () => OnBoarding()),
     GetPage(name: ROUTE.preRegister.name, page: () => const PreRegister()),
     GetPage(
         name: ROUTE.openingAccount.name, page: () => const OpeningAccount()),
@@ -55,5 +59,6 @@ List<GetPage> get routePage {
     GetPage(name: ROUTE.accountType.name, page: () => AccountType()),
     GetPage(name: ROUTE.ktpRegistration.name, page: () => KtpRegistration()),
     GetPage(name: ROUTE.takeCameraKtp.name, page: () => TakeCameraKtp()),
+    GetPage(name: ROUTE.registrationForm.name, page: () => RegistrationForm()),
   ];
 }

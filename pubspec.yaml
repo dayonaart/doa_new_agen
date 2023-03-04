@@ -41,7 +41,10 @@ dependencies:
   carousel_slider: ^4.2.1 
   drop_down_list: ^0.0.4
   google_mlkit_text_recognition: ^0.5.0
-  camera: ^0.10.3+2
+  # camera: ^0.10.3+2
+  camera:
+    path: /home/dayona/Desktop/camera
+  google_mlkit_entity_extraction: ^0.6.0
 
 dev_dependencies:
   flutter_test:
@@ -67,14 +70,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/onboarding/
-    - assets/preregister/
-    - assets/opening_account/
-    - assets/input_phone_number/
-    - assets/country_flag/
-    - assets/account_type/
-    - assets/registration/
-    - assets/take_camera_ktp/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

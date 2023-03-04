@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 
@@ -126,7 +127,7 @@ class AccountTypeController extends GetxController
   late AnimationController expandController;
   late Rx<Animation<double>> animation;
   RxBool isShowFullFeature = false.obs;
-  RxString showFullFeatureBtnTitle = "Selengkapnya".obs;
+  RxString showFullFeatureBtnTitle = AccountTypeWord.selengkapnya.text.obs;
   RxString expandDesc = FeatureExpandListDesc.desc1.desc.obs;
   RxDouble showFullFeatureArrowAngle = 15.0.obs;
   RxList<String> featureValue =
@@ -198,11 +199,11 @@ class AccountTypeController extends GetxController
       isShowFullFeature.value = !isShowFullFeature.value;
       if (isShowFullFeature.value) {
         showFullFeatureArrowAngle.value = 5.0;
-        showFullFeatureBtnTitle.value = "Sembunyikan";
+        showFullFeatureBtnTitle.value = AccountTypeWord.sembunyikan.text;
         expandController.forward();
         scrollToDown();
       } else {
-        showFullFeatureBtnTitle.value = "Selengkapnya";
+        showFullFeatureBtnTitle.value = AccountTypeWord.selengkapnya.text;
         showFullFeatureArrowAngle.value = 15.0;
         expandController.reverse();
       }

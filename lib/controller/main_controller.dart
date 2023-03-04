@@ -5,6 +5,12 @@ class MainController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late AnimationController progresscontroller;
   RxDouble progress = 0.0.obs;
+  RxString ktpFilePath = RxString("");
+
+  void setKtpFilePath(String path) {
+    ktpFilePath.value = path;
+  }
+
   @override
   void onInit() {
     progresscontroller = AnimationController(

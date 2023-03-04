@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/dummies_data/dummies.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/routes.dart';
 import 'dart:math' as math;
 
@@ -14,10 +15,11 @@ class OpeningTncController extends GetxController
   late List<RxBool> isOpen;
   late List<RxDouble> arrowAngle;
   List<RxBool> tncBtn = List.generate(2, (i) => false.obs);
-  List<String> btnTitle = ["Saya setuju dengan", "Saya setuju dengan"];
+  List<String> btnTitle =
+      List.generate(2, (i) => OpeningTncWord.sayaSetujuDengan.text);
   List<String> btnTitleOrange = [
-    " “Syarat dan Ketentuan Rekening Tabungan Perorangan”",
-    " “Persetujuan Penawaran Produk dan Jasa Layanan”"
+    OpeningTncWord.skRekeningTabungan.text,
+    OpeningTncWord.persetujuanPenawaranProduk.text
   ];
   List<String> dummiesTnc = List.generate(4, (index) => TNC);
   List<String> dummiesTncTitle = List.generate(4, (index) => TNC_TITLE);

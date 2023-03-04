@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
+import 'package:mobilenew/widget/widgets.dart';
 
 class KtpRegistrationController extends GetxController
     with WidgetsBindingObserver {
   RxBool isTakePicture = false.obs;
   // final MainController _mainController = Get.find();
-  final MainController _mController = Get.find();
+  final _mController = Get.put(MainController());
   String requirementDescription =
-      "• * sesuai dengan identitas Anda\n• * tidak silau & tidak buram\n• * terbaca jelas dan tidak terpotong\n• Tidak ada objek lain selain KTP dalam foto";
+      KtpRegistrationWord.sesuaiDenganIdentitasAnda.text;
 
   List<TextSpan> get requirementDescriptionWidget {
     return requirementDescription.split("").map((e) {
@@ -26,8 +28,8 @@ class KtpRegistrationController extends GetxController
   }
 
   void Function() next() {
-    return () {
-      Get.toNamed(ROUTE.takeCameraKtp.name);
+    return () async {
+      await Get.toNamed(ROUTE.takeCameraKtp.name);
     };
   }
 

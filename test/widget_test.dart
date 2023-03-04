@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:mobilenew/main.dart';
 import 'package:mobilenew/pages/onboarding.dart';
 
 void main() {

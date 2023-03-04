@@ -3,13 +3,13 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mobilenew/pages/unknown_route.dart';
 import 'package:mobilenew/routes.dart';
 
-void main() {
+Future<void> main() async {
   runApp(GetMaterialApp(
       defaultTransition: Transition.size,
-      transitionDuration: const Duration(seconds: 1),
+      transitionDuration: const Duration(milliseconds: 500),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'montserrat'),
-      initialRoute: ROUTE.root.name,
+      initialRoute: ROUTE.ktpRegistration.name,
       getPages: routePage,
       unknownRoute: GetPage(
         name: '/notfound',

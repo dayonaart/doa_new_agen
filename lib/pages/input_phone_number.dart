@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobilenew/const_path.dart';
 import 'package:mobilenew/controller/input_phone_number_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'dart:math' as math;
@@ -17,7 +19,7 @@ class InputPhoneNumber extends StatelessWidget {
             backgroundColor: Colors.white,
             appBar: APPBAR(
                 onPressed: () => Get.back(),
-                title: "Input Nomor Handphone",
+                title: InputPhoneNumberWord.inputNomorHandphone.text,
                 progressData: 1),
             body: SingleChildScrollView(
               child: Column(
@@ -45,7 +47,7 @@ class InputNumberNextButton extends StatelessWidget {
       child: Obx(() => BUTTON(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Text("Lanjut",
+            child: Text(InputPhoneNumberWord.lanjut.text,
                 style: textStyleW700(fontSize: 18, fontColor: Colors.white)),
           ),
           onPressed: _controller.next())),
@@ -67,18 +69,18 @@ class InputDescription extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset("assets/input_phone_number/lamp.png"),
+                  Image.asset(lampAssets),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text.rich(TextSpan(children: [
                       TextSpan(
                           text:
-                              "Kami akan melakukan proses verifikasi nomor HP setelah proses pembukaan rekening selesai diproses. Pastikan ",
+                              InputPhoneNumberWord.kamiAkanMelakukanProses.text,
                           style: textStyleW500(
                               fontSize: 12, fontColor: BLUE_TEXT)),
                       TextSpan(
                           text:
-                              "nomor Anda memiliki pulsa dan terkoneksi dengan jaringan Internet.",
+                              InputPhoneNumberWord.nomorAndaMemilikiPulsa.text,
                           style:
                               textStyleW700(fontSize: 12, fontColor: BLUE_TEXT))
                     ])),
@@ -89,17 +91,17 @@ class InputDescription extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset("assets/input_phone_number/key.png"),
+                  Image.asset(keyAssets),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text.rich(TextSpan(children: [
                       TextSpan(
-                          text: "Jaga kerahasiaan OTP ",
+                          text: InputPhoneNumberWord.jagaKerahasiaanOTP.text,
                           style: textStyleW700(
                               fontSize: 12, fontColor: BLUE_TEXT)),
                       TextSpan(
                           text:
-                              "dengan tidak memberitahu kepada siapapun termasuk kepada Petugas Bank.",
+                              InputPhoneNumberWord.denganTidakMemberitahu.text,
                           style:
                               textStyleW500(fontSize: 12, fontColor: BLUE_TEXT))
                     ])),
@@ -124,7 +126,8 @@ class InputNumberPhone extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Nomor Handphone", style: textStyleW600(fontSize: 14)),
+          Text(InputPhoneNumberWord.nomorHandphone.text,
+              style: textStyleW600(fontSize: 14)),
           Container(
             padding: const EdgeInsets.only(bottom: 10),
             decoration: const BoxDecoration(
@@ -138,14 +141,13 @@ class InputNumberPhone extends StatelessWidget {
                   onPressed: () {},
                   child: Row(
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 10,
-                        backgroundImage:
-                            AssetImage("assets/country_flag/indonesia.png"),
+                        backgroundImage: AssetImage(indonesianFlagAssets),
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        "Indonesia (+62)",
+                        InputPhoneNumberWord.indonesia62.text,
                         style: textStyleW500(fontSize: 15),
                       ),
                       const SizedBox(width: 14.14),
@@ -196,7 +198,8 @@ class InputLocation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Posisi Anda Saat Ini", style: textStyleW600(fontSize: 14)),
+          Text(InputPhoneNumberWord.posisiAndaSaatIni.text,
+              style: textStyleW600(fontSize: 14)),
           MaterialButton(
             padding: const EdgeInsets.all(0),
             onPressed: _controller.selectingCountry(context),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/opening_tnc_controller.dart';
 import 'package:mobilenew/dummies_data/dummies.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -14,7 +15,9 @@ class OpeningTnc extends StatelessWidget {
     return SAFE_AREA(
         child: SCAFFOLD(
       backgroundColor: Colors.white,
-      appBar: APPBAR(onPressed: () => Get.back(), title: "Syarat & Ketentuan"),
+      appBar: APPBAR(
+          onPressed: () => Get.back(),
+          title: OpeningTncWord.syaratKetentuan.text),
       body: SingleChildScrollView(
         controller: _controller.scController,
         child: TncBody(),
@@ -84,7 +87,7 @@ class TncAgreementButton extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  "Lanjut",
+                  OpeningTncWord.lanjut.text,
                   style: textStyleW600(fontSize: 16, fontColor: Colors.white),
                 ),
               ),

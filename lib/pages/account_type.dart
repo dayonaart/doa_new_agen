@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobilenew/const_path.dart';
 import 'package:mobilenew/controller/account_type_controller.dart';
+import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
@@ -16,7 +18,7 @@ class AccountType extends StatelessWidget {
         child: SCAFFOLD(
       appBar: APPBAR(
           onPressed: () => Get.back(),
-          title: "Pilih Rekening",
+          title: AccountTypeWord.pilihRekening.text,
           progressData: 2),
       body: SingleChildScrollView(
         controller: _controller.scController,
@@ -59,7 +61,7 @@ class AccountFeature extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Fitur Kartu",
+          Text(AccountTypeWord.fiturKartu.text,
               style: textStyleW600(fontSize: 14, fontColor: ORANGE)),
           const SizedBox(height: 20),
           Obx(() {
@@ -94,7 +96,7 @@ class AccountFeature extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Keuntungan & Manfaat",
+                    Text(AccountTypeWord.keuntunganManfaat.text,
                         style: textStyleW600(fontSize: 14, fontColor: ORANGE)),
                     const SizedBox(height: 20),
                     Column(
@@ -186,7 +188,7 @@ class AccountHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Jenis Tabungan",
+            AccountTypeWord.jenisTabungan.text,
             style: textStyleW600(fontSize: 14),
           ),
           const SizedBox(height: 27.75),
@@ -197,14 +199,13 @@ class AccountHeader extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Text(
-                  "Taplus Bisnis Agen46",
+                  AccountTypeWord.taplusBisnisAgen46.text,
                   style: textStyleW600(fontSize: 14),
                 ),
               ),
               onPressed: () {}),
           const SizedBox(height: 24.25),
-          Text(
-              "Memberikan kemudahan, kenyamanan layanan dan banyak keuntungan untuk berbagai aktifitas perbankan.",
+          Text(AccountTypeWord.memberikanKemudahan.text,
               style: textStyleW500(fontSize: 14)),
           const SizedBox(height: 23.69),
         ],
@@ -228,7 +229,7 @@ class AccountList extends StatelessWidget {
               child: Opacity(
                 opacity: _controller.corouselIndex.value == i ? 1 : 0.4,
                 child: Image.asset(
-                  "assets/account_type/account${i + 1}.png",
+                  "$accountTypeAssets${i + 1}.png",
                   filterQuality: FilterQuality.high,
                 ),
               ),
