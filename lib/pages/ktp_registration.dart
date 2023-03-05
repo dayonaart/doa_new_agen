@@ -1,3 +1,5 @@
+// import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/const_path.dart';
@@ -12,6 +14,8 @@ class KtpRegistration extends StatelessWidget {
   final _controller = Get.put(KtpRegistrationController());
   @override
   Widget build(BuildContext context) {
+    // print("${window.physicalSize.height} x ${window.physicalSize.width}");
+
     return SAFE_AREA(
         child: SCAFFOLD(
             appBar: APPBAR(

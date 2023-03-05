@@ -60,12 +60,12 @@ AppBar APPBAR(
   );
 }
 
-ElevatedButton OUTLINE_BUTTON({
-  @required Widget? child,
-  @required void Function()? onPressed,
-  Color sideColor = BLUE_DARK,
-  double? radiusCircular,
-}) {
+ElevatedButton OUTLINE_BUTTON(
+    {@required Widget? child,
+    @required void Function()? onPressed,
+    Color sideColor = BLUE_DARK,
+    double? radiusCircular,
+    MainAxisSize? mainAxisSize}) {
   assert(child != null);
   return ElevatedButton(
       onPressed: onPressed,
@@ -77,6 +77,7 @@ ElevatedButton OUTLINE_BUTTON({
                   side: BorderSide(width: 0.5, color: sideColor))),
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
       child: Row(
+        mainAxisSize: mainAxisSize ?? MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           child!,

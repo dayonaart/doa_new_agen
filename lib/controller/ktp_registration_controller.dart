@@ -5,13 +5,12 @@ import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
-import 'package:mobilenew/widget/widgets.dart';
 
 class KtpRegistrationController extends GetxController
     with WidgetsBindingObserver {
   RxBool isTakePicture = false.obs;
   // final MainController _mainController = Get.find();
-  final _mController = Get.put(MainController());
+  final MainController _mController = Get.find();
   String requirementDescription =
       KtpRegistrationWord.sesuaiDenganIdentitasAnda.text;
 

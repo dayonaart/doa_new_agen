@@ -41,10 +41,10 @@ dependencies:
   carousel_slider: ^4.2.1 
   drop_down_list: ^0.0.4
   google_mlkit_text_recognition: ^0.5.0
-  # camera: ^0.10.3+2
-  camera:
-    path: /home/dayona/Desktop/camera
-  google_mlkit_entity_extraction: ^0.6.0
+  camera: ^0.10.3+2
+  # camera:
+  #   path: /home/dayona/Desktop/camera
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
