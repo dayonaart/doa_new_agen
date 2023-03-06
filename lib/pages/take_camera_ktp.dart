@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/const_path.dart';
@@ -6,6 +7,7 @@ import 'package:mobilenew/controller/main_controller.dart';
 import 'package:mobilenew/controller/take_camera_ktp_controller.dart';
 import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/style/colors.dart';
+import 'package:mobilenew/widget/dashed_rect.dart';
 import 'package:mobilenew/widget/widgets.dart';
 
 class TakeCameraKtp extends StatelessWidget {
@@ -16,7 +18,7 @@ class TakeCameraKtp extends StatelessWidget {
     return SAFE_AREA(
         child: SCAFFOLD(
             appBar: APPBAR(
-                onPressed: _controller.onBack(),
+                onPressed: () => Get.back(),
                 title: TakeCameraKtpWord.registrasi.text,
                 progressData: 3),
             body: GetBuilder<TakeCameraKtpController>(builder: (_) {
@@ -78,9 +80,7 @@ class TakeCameraTool extends StatelessWidget {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _.cameraPreviewWidget(boxHeight: 248, boxWidth: 365),
-              const SizedBox(height: 50),
-              Text("Scanning ${_.progressTextRecognize}%")
+              CameraKtpPreview(),
             ],
           )),
           Padding(
@@ -94,7 +94,7 @@ class TakeCameraTool extends StatelessWidget {
                   height: 72,
                   width: 72,
                   child: GestureDetector(
-                    // onTap: _.takePicture(),
+                    onTap: _.takePicture(),
                     child: CircleAvatar(
                       backgroundColor: Colors.transparent,
                       child: Image.asset(
@@ -122,6 +122,77 @@ class TakeCameraTool extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 63),
+        ],
+      ),
+    );
+  }
+}
+
+class CameraKtpPreview extends StatelessWidget {
+  final TakeCameraKtpController _controller = Get.find();
+
+  CameraKtpPreview({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: _controller.boxHeight,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        clipBehavior: Clip.none,
+        fit: StackFit.expand,
+        children: <Widget>[
+          Center(
+            child: SizedBox(
+              height: _controller.boxHeight,
+              key: _controller.cameraPrev,
+              child: AspectRatio(
+                aspectRatio: 1 / _controller.previewAspectRatio,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  child: Transform.scale(
+                    scale: _controller.camController!.value.aspectRatio /
+                        _controller.previewAspectRatio,
+                    child: Center(
+                      child: CameraPreview(
+                        _controller.camController!,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Stack(
+                children: [
+                  SizedBox(
+                      height: _controller.boxHeight,
+                      width: _controller.boxWidth,
+                      child: const DashedRect(color: Colors.white)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 40),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                                height: 30,
+                                child: DashedRect(color: Colors.white))),
+                        const SizedBox(width: 17),
+                        Expanded(
+                          child: SizedBox(
+                              height: _controller.boxHeight / 1.5,
+                              child: const DashedRect(color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
         ],
       ),
     );

@@ -86,9 +86,11 @@ class PreTakeImage extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Image.asset(lampAssets),
                       const SizedBox(width: 12),
-                      Text(KtpRegistrationWord.pastikanHasilFoto.text,
-                          style:
-                              textStyleW600(fontSize: 12, fontColor: BLUE_TEXT))
+                      Expanded(
+                        child: Text(KtpRegistrationWord.pastikanHasilFoto.text,
+                            style: textStyleW600(
+                                fontSize: 12, fontColor: BLUE_TEXT)),
+                      )
                     ]),
                     const SizedBox(height: 8),
                     Text.rich(TextSpan(

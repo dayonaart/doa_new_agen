@@ -9,8 +9,7 @@ import 'package:mobilenew/style/textstyle.dart';
 class KtpRegistrationController extends GetxController
     with WidgetsBindingObserver {
   RxBool isTakePicture = false.obs;
-  // final MainController _mainController = Get.find();
-  final MainController _mController = Get.put(MainController());
+  final MainController _mController = Get.find();
   String requirementDescription =
       KtpRegistrationWord.sesuaiDenganIdentitasAnda.text;
 

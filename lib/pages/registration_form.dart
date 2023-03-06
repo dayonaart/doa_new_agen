@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/const_path.dart';
@@ -28,16 +26,15 @@ class RegistrationForm extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 39),
-                  child: BUTTON(
-                      radiusCircular: 999,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: Text(
-                          "Lanjut",
-                          style: textStyleW600(fontSize: 16),
-                        ),
-                      ),
-                      onPressed: _controller.test()),
+                  child: Obx(() {
+                    return BUTTON(
+                        radiusCircular: 999,
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Text("Lanjut",
+                                style: textStyleW600(fontSize: 16))),
+                        onPressed: _controller.next());
+                  }),
                 )
               ],
             ))));
@@ -69,21 +66,24 @@ class RegistrationFormField extends StatelessWidget {
                           children: [
                             const SizedBox(height: 24),
                             _controller.textEditingLabel(i),
-                            TextField(
-                              style: textStyleW500(fontSize: 16),
-                              controller: _controller.textController(i),
-                              decoration: InputDecoration(
-                                  suffixIcon: i == 2
-                                      ? const Icon(Icons.date_range,
-                                          color: ORANGE)
-                                      : null,
-                                  border: const UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(width: 0.5, color: GREY)),
-                                  floatingLabelStyle:
-                                      textStyleW600(fontSize: 14),
-                                  labelStyle: textStyleW600(fontSize: 14)),
-                            ),
+                            Obx(() {
+                              return TextField(
+                                keyboardType: _controller.textInputType(i),
+                                readOnly: true,
+                                enabled: _controller.enableEditing.value,
+                                style: textStyleW500(fontSize: 16),
+                                controller: _controller.textController(i),
+                                decoration: InputDecoration(
+                                    suffixIcon:
+                                        _controller.suffixHelperWidget(i),
+                                    border: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 0.5, color: GREY)),
+                                    floatingLabelStyle:
+                                        textStyleW600(fontSize: 14),
+                                    labelStyle: textStyleW600(fontSize: 14)),
+                              );
+                            })
                           ],
                         ),
                       ),
@@ -96,19 +96,24 @@ class RegistrationFormField extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _controller.textEditingLabel(i),
-                      TextField(
-                        style: textStyleW500(fontSize: 16),
-                        controller: _controller.textController(i),
-                        decoration: InputDecoration(
-                            suffixIcon: i == 2
-                                ? const Icon(Icons.date_range, color: ORANGE)
-                                : null,
-                            border: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: GREY)),
-                            floatingLabelStyle: textStyleW600(fontSize: 14),
-                            labelStyle: textStyleW600(fontSize: 14)),
-                      ),
+                      Obx(() {
+                        return TextField(
+                          readOnly: i == 2,
+                          onTap: i != 2 ? null : _controller.datePicker(),
+                          keyboardType: _controller.textInputType(i),
+                          onChanged: _controller.formOnChange(i),
+                          enabled: _controller.enableEditing.value,
+                          style: textStyleW500(fontSize: 16),
+                          controller: _controller.textController(i),
+                          decoration: InputDecoration(
+                              suffixIcon: _controller.suffixHelperWidget(i),
+                              border: const UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(width: 0.5, color: GREY)),
+                              floatingLabelStyle: textStyleW600(fontSize: 14),
+                              labelStyle: textStyleW600(fontSize: 14)),
+                        );
+                      })
                     ],
                   ),
                 );
@@ -131,13 +136,9 @@ class RegistrationFormEditKtp extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 8),
-        SizedBox(
-          width: Get.width / 2,
-          child: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Image.file(File(_controller.ktpPath), fit: BoxFit.cover),
-          ),
-        ),
+        Obx(() {
+          return _controller.ktpWidget.value;
+        }),
         const SizedBox(height: 20),
         OUTLINE_BUTTON(
             radiusCircular: 999,
@@ -149,14 +150,12 @@ class RegistrationFormEditKtp extends StatelessWidget {
                 children: [
                   ImageIcon(AssetImage(penAssets), color: ORANGE),
                   const SizedBox(width: 6.27),
-                  Text(
-                    "Ubah",
-                    style: textStyleW500(fontSize: 14, fontColor: ORANGE),
-                  )
+                  Text("Ubah",
+                      style: textStyleW500(fontSize: 14, fontColor: ORANGE))
                 ],
               ),
             ),
-            onPressed: () {}),
+            onPressed: _controller.enableOnEditTextField()),
       ],
     );
   }
@@ -184,20 +183,19 @@ class RegistrationFormHeader extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 16, horizontal: 13.67),
               child: Row(
                 children: [
-                  ImageIcon(AssetImage(iAssets)),
+                  ImageIcon(AssetImage(iAssets), color: BLUE_TEXT),
                   const SizedBox(width: 13.67),
                   Expanded(
-                    child: Text.rich(TextSpan(children: [
-                      TextSpan(
-                          text: "Pastikan semua data diri",
-                          style: textStyleW500(
-                              fontSize: 12, fontColor: BLUE_TEXT)),
-                      TextSpan(
-                          text: " sudah sesuai dengan e-KTP Anda!",
-                          style: textStyleW600(
-                              fontSize: 12, fontColor: BLUE_TEXT)),
-                    ])),
-                  ),
+                      child: Text.rich(TextSpan(children: [
+                    TextSpan(
+                        text: "Pastikan semua data diri",
+                        style:
+                            textStyleW500(fontSize: 12, fontColor: BLUE_TEXT)),
+                    TextSpan(
+                        text: " sudah sesuai dengan e-KTP Anda!",
+                        style:
+                            textStyleW600(fontSize: 12, fontColor: BLUE_TEXT)),
+                  ]))),
                 ],
               ),
             ),
