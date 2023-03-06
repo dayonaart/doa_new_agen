@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobilenew/const_path.dart';
 import 'package:mobilenew/controller/registration_form_controller.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
@@ -146,7 +147,7 @@ class RegistrationFormEditKtp extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 18.5, vertical: 4),
               child: Row(
                 children: [
-                  const Icon(Icons.draw_outlined, color: ORANGE),
+                  ImageIcon(AssetImage(penAssets), color: ORANGE),
                   const SizedBox(width: 6.27),
                   Text(
                     "Ubah",
@@ -183,7 +184,7 @@ class RegistrationFormHeader extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 16, horizontal: 13.67),
               child: Row(
                 children: [
-                  const Icon(Icons.help, color: BLUE_TEXT),
+                  ImageIcon(AssetImage(iAssets)),
                   const SizedBox(width: 13.67),
                   Expanded(
                     child: Text.rich(TextSpan(children: [

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/const_path.dart';
@@ -65,7 +64,7 @@ class TakeCameraTool extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.help_outline_rounded, color: BLUE_TEXT),
+                  ImageIcon(AssetImage(iAssets), color: BLUE_TEXT),
                   const SizedBox(width: 9.67),
                   Expanded(
                       child: Text.rich(

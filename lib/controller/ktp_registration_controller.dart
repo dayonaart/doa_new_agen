@@ -10,7 +10,7 @@ class KtpRegistrationController extends GetxController
     with WidgetsBindingObserver {
   RxBool isTakePicture = false.obs;
   // final MainController _mainController = Get.find();
-  final MainController _mController = Get.find();
+  final MainController _mController = Get.put(MainController());
   String requirementDescription =
       KtpRegistrationWord.sesuaiDenganIdentitasAnda.text;
 

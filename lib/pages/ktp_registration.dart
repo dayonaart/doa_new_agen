@@ -71,15 +71,33 @@ class PreTakeImage extends StatelessWidget {
           Text(KtpRegistrationWord.prosesIniBertujuan.text,
               style: textStyleW500(fontSize: 14), textAlign: TextAlign.center),
           const SizedBox(height: 40),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Image.asset(lampAssets),
-            const SizedBox(width: 12),
-            Text(KtpRegistrationWord.pastikanHasilFoto.text,
-                style: textStyleW600(fontSize: 12, fontColor: BLUE_TEXT))
-          ]),
-          const SizedBox(height: 8),
-          Text.rich(
-              TextSpan(children: _controller.requirementDescriptionWidget)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Card(
+              color: BLUE_LIGHT,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              elevation: 0,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 13.25, vertical: 16),
+                child: Column(
+                  children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Image.asset(lampAssets),
+                      const SizedBox(width: 12),
+                      Text(KtpRegistrationWord.pastikanHasilFoto.text,
+                          style:
+                              textStyleW600(fontSize: 12, fontColor: BLUE_TEXT))
+                    ]),
+                    const SizedBox(height: 8),
+                    Text.rich(TextSpan(
+                        children: _controller.requirementDescriptionWidget)),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -45,6 +45,7 @@ class InputNumberNextButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 39),
       child: Obx(() => BUTTON(
+          radiusCircular: 999,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Text(InputPhoneNumberWord.lanjut.text,

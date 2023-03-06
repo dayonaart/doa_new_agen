@@ -426,7 +426,7 @@ class TakeCameraKtpController extends GetxController
       validation[1] = true;
     }
     if (_dobValidation != null) {
-      ktpData[2] = "$_dobValidation";
+      ktpData[2] = _dobValidation;
       validation[2] = true;
     }
     return validation.every((element) => element);

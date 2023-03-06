@@ -8,3 +8,5 @@ String preregisterAssets = "assets/preregister.png";
 String takeCameraButtonAssets = "assets/take_button.png";
 String flipCameraButtonAssets = "assets/flip_button.png";
 String openingAccountAssets = "assets/opening_account.png";
+String iAssets = "assets/i.png";
+String penAssets = "assets/pen.png";

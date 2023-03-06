@@ -47,6 +47,7 @@ class OpeningAccount extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ImageIcon(AssetImage(lampAssets), color: BLUE_TEXT),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
