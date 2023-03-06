@@ -14,7 +14,7 @@ Future<void> main() async {
       transitionDuration: const Duration(milliseconds: 500),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'montserrat'),
-      initialRoute: ROUTE.onBoarding.name,
+      initialRoute: ROUTE.registrationForm.name,
       getPages: routePage,
       unknownRoute: GetPage(
         name: '/notfound',

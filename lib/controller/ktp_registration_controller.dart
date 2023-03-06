@@ -6,10 +6,10 @@ import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 
-class KtpRegistrationController extends GetxController
-    with WidgetsBindingObserver {
+class KtpRegistrationController extends GetxController {
   RxBool isTakePicture = false.obs;
   final MainController _mController = Get.find();
+
   String requirementDescription =
       KtpRegistrationWord.sesuaiDenganIdentitasAnda.text;
 
@@ -32,8 +32,8 @@ class KtpRegistrationController extends GetxController
   }
 
   @override
-  void onReady() {
+  void onInit() {
     _mController.startProgressAnim();
-    super.onReady();
+    super.onInit();
   }
 }

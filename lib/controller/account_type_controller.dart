@@ -34,12 +34,12 @@ class AccountTypeController extends GetxController
   @override
   void onInit() {
     _prepareAnimations();
+    _mController.startProgressAnim();
     super.onInit();
   }
 
   @override
   void onReady() {
-    _mController.startProgressAnim();
     scrollToDown();
     super.onReady();
   }

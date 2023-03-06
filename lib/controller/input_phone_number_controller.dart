@@ -13,7 +13,7 @@ class InputPhoneNumberController extends GetxController {
   RxBool numberValidation = false.obs;
   RxBool helperValidation = false.obs;
   RxString selectedCountry = InputPhoneNumberWord.negara.text.obs;
-  final _mController = Get.put(MainController());
+  final MainController _mController = Get.find();
 
   @override
   void onInit() {

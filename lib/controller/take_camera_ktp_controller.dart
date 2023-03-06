@@ -109,21 +109,6 @@ class TakeCameraKtpController extends GetxController
   }
 
   @override
-  void onInit() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    _cameras = await availableCameras();
-    super.onInit();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    camController?.dispose();
-    camController?.stopImageStream();
-    super.dispose();
-  }
-
-  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final CameraController? cameraController = camController;
     if (cameraController == null || !cameraController.value.isInitialized) {
@@ -136,13 +121,6 @@ class TakeCameraKtpController extends GetxController
       onNewCameraSelected(cameraController.description);
     }
     super.didChangeAppLifecycleState(state);
-  }
-
-  @override
-  void onReady() async {
-    _mController.startProgressAnim();
-    await _initCameraController(_cameras.first);
-    super.onReady();
   }
 
   Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
@@ -199,5 +177,27 @@ class TakeCameraKtpController extends GetxController
           break;
       }
     }
+  }
+
+  @override
+  void onInit() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    _cameras = await availableCameras();
+    _mController.startProgressAnim();
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    camController?.dispose();
+    camController?.stopImageStream();
+    super.dispose();
+  }
+
+  @override
+  void onReady() async {
+    await _initCameraController(_cameras.first);
+    super.onReady();
   }
 }

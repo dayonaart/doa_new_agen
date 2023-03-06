@@ -12,7 +12,7 @@ import 'package:mobilenew/widget/widgets.dart';
 import 'package:screenshot/screenshot.dart';
 
 class RegistrationFormController extends GetxController {
-  final MainController _mController = Get.find();
+  final _mController = Get.put(MainController());
   String get ktpPath => _mController.ktpFilePath.value;
   String get _myKtpPath => "assets/my_ktp.JPG";
   RxBool enableEditing = RxBool(false);
@@ -35,8 +35,8 @@ class RegistrationFormController extends GetxController {
       width: Get.width / 2,
       child: AspectRatio(
         aspectRatio: 16 / 9,
-        child: Image.file(File(ktpPath), fit: BoxFit.cover),
-        // child: Image.asset(_myKtpPath, fit: BoxFit.cover),
+        // child: Image.file(File(ktpPath), fit: BoxFit.cover),
+        child: Image.asset(_myKtpPath, fit: BoxFit.cover),
       ),
     ));
     ktpWidget.value = ClipRRect(
@@ -242,6 +242,7 @@ class RegistrationFormController extends GetxController {
 
   @override
   void onInit() {
+    _mController.startProgressAnim();
     nikTextController = TextEditingController();
     fullNameTextController = TextEditingController();
     dobTextController = TextEditingController();
@@ -254,7 +255,6 @@ class RegistrationFormController extends GetxController {
 
   @override
   void onReady() async {
-    _mController.startProgressAnim();
     await _cropKtpImage();
     super.onReady();
   }

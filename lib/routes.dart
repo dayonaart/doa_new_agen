@@ -7,6 +7,9 @@ import 'package:mobilenew/pages/opening_account.dart';
 import 'package:mobilenew/pages/opening_tnc.dart';
 import 'package:mobilenew/pages/preregister.dart';
 import 'package:mobilenew/pages/registration_form.dart';
+import 'package:mobilenew/pages/registration_form_job_detail.dart';
+import 'package:mobilenew/pages/registration_form_office_branch.dart';
+import 'package:mobilenew/pages/registration_form_private.dart';
 import 'package:mobilenew/pages/take_camera_ktp.dart';
 
 enum ROUTE {
@@ -19,6 +22,9 @@ enum ROUTE {
   ktpRegistration,
   takeCameraKtp,
   registrationForm,
+  registrationFormPrivate,
+  registrationFormJobDetail,
+  registrationFormOfficeBranch,
 }
 
 extension Page on ROUTE {
@@ -42,6 +48,12 @@ extension Page on ROUTE {
         return '/takeCameraKtp';
       case ROUTE.registrationForm:
         return '/registrationForm';
+      case ROUTE.registrationFormPrivate:
+        return '/registrationFormPrivate';
+      case ROUTE.registrationFormJobDetail:
+        return '/registrationFormJobDetail';
+      case ROUTE.registrationFormOfficeBranch:
+        return '/registrationFormOfficeBranch';
       default:
         return "";
     }
@@ -60,5 +72,14 @@ List<GetPage> get routePage {
     GetPage(name: ROUTE.ktpRegistration.name, page: () => KtpRegistration()),
     GetPage(name: ROUTE.takeCameraKtp.name, page: () => TakeCameraKtp()),
     GetPage(name: ROUTE.registrationForm.name, page: () => RegistrationForm()),
+    GetPage(
+        name: ROUTE.registrationFormPrivate.name,
+        page: () => RegistrationFormPrivate()),
+    GetPage(
+        name: ROUTE.registrationFormJobDetail.name,
+        page: () => RegistrationFormJobDetail()),
+    GetPage(
+        name: ROUTE.registrationFormOfficeBranch.name,
+        page: () => RegistrationFormOfficeBranch()),
   ];
 }
