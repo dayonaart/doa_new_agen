@@ -74,6 +74,9 @@ class RegistrationFormField extends StatelessWidget {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           readOnly: i == 2,
                           onTap: i != 2 ? null : _controller.datePicker(),
+                          textCapitalization: i == 1
+                              ? TextCapitalization.words
+                              : TextCapitalization.none,
                           keyboardType: _controller.textInputType(i),
                           onChanged: _controller.formOnChange(i),
                           validator: _controller.formValidator(i),

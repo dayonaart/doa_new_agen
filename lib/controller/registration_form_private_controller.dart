@@ -1,11 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:drop_down_list/drop_down_list.dart';
+import 'package:drop_down_list/model/selected_list_item.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobilenew/api/api.dart';
 import 'package:mobilenew/controller/main_controller.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
+import 'dart:math' as math;
 
 class RegistrationFormPrivateController extends GetxController {
   final MainController _mController = Get.find();
+  RxList<AddressModel?> provinceList = RxList();
+  RxList<AddressModel?> subDistrictList = RxList();
+  RxList<AddressModel?> regencyList = RxList();
   int totalField = 20;
   late TextEditingController fullNameTxtController,
       pobTxtController,
@@ -249,6 +256,175 @@ class RegistrationFormPrivateController extends GetxController {
     }
   }
 
+  Widget suffixIcon() {
+    return Transform.rotate(
+        angle: 15 / math.pi,
+        child: const Icon(
+          Icons.arrow_back_ios_new,
+          color: ORANGE,
+          size: 20,
+        ));
+  }
+
+  InputDecoration? inputDecoration(int i) {
+    switch (i) {
+      case 3:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText: "Pilih Jenis Kelamin",
+            hintStyle: textStyleW600(fontColor: GREY));
+      case 7:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText: "Pilih Provinsi",
+            hintStyle: textStyleW600(fontColor: GREY));
+      case 8:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText: "Pilih Kota / Kabupaten",
+            hintStyle: textStyleW600(fontColor: GREY));
+      case 9:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText: "Pilih Kecamatan",
+            hintStyle: textStyleW600(fontColor: GREY));
+      case 11:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText: "Pilih Agama",
+            hintStyle: textStyleW600(fontColor: GREY));
+      case 12:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText: "Pilih Kode Pos",
+            hintStyle: textStyleW600(fontColor: GREY));
+      default:
+        return null;
+    }
+  }
+
+  bool readOnlyField(int i) {
+    switch (i) {
+      case 0:
+        return true;
+      case 2:
+        return true;
+      case 3:
+        return true;
+      case 7:
+        return true;
+      case 8:
+        return true;
+      case 9:
+        return true;
+      case 11:
+        return true;
+      case 12:
+        return true;
+      case 15:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  void Function()? onFieldTap(int i) {
+    switch (i) {
+      case 3:
+        return dropDownSelecting(i, "Pilih Jenis Kelamin");
+      case 7:
+        return dropDownSelecting(i, "Pilih Provinsi");
+      case 8:
+        return dropDownSelecting(i, "Pilih Kota / Kabupaten");
+      default:
+        return null;
+    }
+  }
+
+  final List<String> genderItems = ["Laki-Laki", "Perempuan"];
+
+  List<SelectedListItem>? selectedListItem(int i) {
+    switch (i) {
+      case 3:
+        return List.generate(
+            genderItems.length, (i) => SelectedListItem(name: genderItems[i]));
+      case 7:
+        return List.generate(provinceList.length,
+            (i) => SelectedListItem(name: provinceList[i]!.nama!));
+      case 8:
+        return List.generate(subDistrictList.length,
+            (i) => SelectedListItem(name: subDistrictList[i]!.nama!));
+      case 9:
+        return List.generate(regencyList.length,
+            (i) => SelectedListItem(name: regencyList[i]!.nama!));
+      default:
+        return null;
+    }
+  }
+
+  dynamic Function(List<dynamic>)? selectedItem(int i) {
+    switch (i) {
+      case 3:
+        return (item) {
+          genderTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+        };
+      case 7:
+        return (item) async {
+          provinceTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+          await _findSubdistrict();
+        };
+      case 8:
+        return (item) async {
+          subdistrictTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+          await _findRegency();
+        };
+      case 9:
+        return (item) {
+          regencyTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+        };
+      default:
+        return null;
+    }
+  }
+
+  Future<void> _findSubdistrict() async {
+    var _i_ =
+        provinceList.indexWhere((e) => e!.nama == provinceTxtController.text);
+    var payload = provinceList[_i_]?.id;
+    var getSubDistrict = await Api().GET("kabupaten/$payload.json");
+    subDistrictList.value = List.generate(
+        (getSubDistrict as List<dynamic>).length,
+        (index) => AddressModel.fromJson(getSubDistrict[index]));
+  }
+
+  Future<void> _findRegency() async {
+    var _i_ = subDistrictList
+        .indexWhere((e) => e!.nama == subdistrictTxtController.text);
+    var payload = subDistrictList[_i_]?.id;
+    print(payload);
+    // var getRegency = await Api().GET("kabupaten/$payload.json");
+    // regencyList.value = List.generate((getRegency as List<dynamic>).length,
+    //     (index) => AddressModel.fromJson(getRegency[index]));
+  }
+
+  void Function()? dropDownSelecting(int i, String title) {
+    return () {
+      DropDownState(
+        DropDown(
+          isSearchVisible: i == 3 ? false : true,
+          bottomSheetTitle: Text(title, style: textStyleW600(fontSize: 16)),
+          data: selectedListItem(i)!,
+          selectedItems: selectedItem(i),
+          enableMultipleSelection: false,
+        ),
+      ).showModal(Get.context);
+    };
+  }
+
   @override
   void onInit() {
     fullNameTxtController =
@@ -277,8 +453,37 @@ class RegistrationFormPrivateController extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     _mController.startProgressAnim();
+    var _province = await Api().GET("provinsi.json");
+    provinceList.value = List.generate((_province as List<dynamic>).length,
+        (index) => AddressModel.fromJson(_province[index]));
     super.onReady();
+  }
+
+  void Function() test() {
+    return () async {
+      print(subDistrictList.map((element) => element?.toJson()).toList());
+    };
+  }
+}
+
+class AddressModel {
+  String? id;
+  String? nama;
+
+  AddressModel({
+    this.id,
+    this.nama,
+  });
+  AddressModel.fromJson(Map<String, dynamic> json) {
+    id = json['id']?.toString();
+    nama = json['nama']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['nama'] = nama;
+    return data;
   }
 }

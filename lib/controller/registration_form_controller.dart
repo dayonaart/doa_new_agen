@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,8 +45,8 @@ class RegistrationFormController extends GetxController {
       width: Get.width / 2,
       child: AspectRatio(
         aspectRatio: 16 / 9,
-        // child: Image.file(File(ktpPath), fit: BoxFit.cover),
-        child: Image.asset(_myKtpPath, fit: BoxFit.cover),
+        child: Image.file(File(ktpPath), fit: BoxFit.cover),
+        // child: Image.asset(_myKtpPath, fit: BoxFit.cover),
       ),
     ));
     ktpWidget.value = ClipRRect(
