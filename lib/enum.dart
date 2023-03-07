@@ -1,4 +1,5 @@
-final RegExp nameRegExp = RegExp('[a-zA-Z]');
+final RegExp nameRegExp = RegExp(r'[{}+!@#$%^&*()?><,./\;@=_0-9-]');
+RegExp phoneRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
 
 enum OnBoardingWord {
   tungguApalagi,

@@ -183,7 +183,6 @@ class TakeCameraKtpController extends GetxController
   void onInit() async {
     WidgetsFlutterBinding.ensureInitialized();
     _cameras = await availableCameras();
-    _mController.startProgressAnim();
     super.onInit();
   }
 
@@ -197,6 +196,7 @@ class TakeCameraKtpController extends GetxController
 
   @override
   void onReady() async {
+    _mController.startProgressAnim();
     await _initCameraController(_cameras.first);
     super.onReady();
   }

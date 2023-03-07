@@ -10,15 +10,15 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class InputPhoneNumberController extends GetxController {
   final TextEditingController numberEditingController = TextEditingController();
-  RxBool numberValidation = false.obs;
-  RxBool helperValidation = false.obs;
+  RxBool numberValidation = RxBool(false);
+
   RxString selectedCountry = InputPhoneNumberWord.negara.text.obs;
   final MainController _mController = Get.find();
 
   @override
-  void onInit() {
+  void onReady() {
     _mController.startProgressAnim();
-    super.onInit();
+    super.onReady();
   }
 
   final List<String> items = [
@@ -65,16 +65,25 @@ class InputPhoneNumberController extends GetxController {
     };
   }
 
-  void Function(String)? onInputNumberChanged() {
+  String? Function(String?)? phoneNumberValidator() {
     return (val) {
-      if (val.isEmpty) {
+      if (val!.isEmpty) {
+        return "Nomor Handphone wajib diisi";
+      } else if (!phoneRegExp.hasMatch(val)) {
+        return "Pastikan Nomor Handphone Anda sudah benar";
+      } else {
+        return null;
+      }
+    };
+  }
+
+  void Function(String?) phoneNumberOnChange() {
+    return (val) {
+      if (val!.isEmpty) {
         numberValidation.value = false;
-        helperValidation.value = false;
-      } else if (val.length <= 10 || val.length > 12) {
-        helperValidation.value = true;
+      } else if (!phoneRegExp.hasMatch(val)) {
         numberValidation.value = false;
       } else {
-        helperValidation.value = false;
         numberValidation.value = true;
       }
     };
@@ -95,8 +104,11 @@ class InputPhoneNumberController extends GetxController {
     if (numberValidation.value &&
         selectedCountry.value != InputPhoneNumberWord.negara.text) {
       return () async {
-        print(
-            "{'number':${numberEditingController.text},'country':${selectedCountry.value}}");
+        final _payload = {
+          "number": numberEditingController.text,
+          "country": selectedCountry.value
+        };
+        _mController.setInputNumberData(_payload);
         await Get.toNamed(ROUTE.accountType.name);
       };
     } else {

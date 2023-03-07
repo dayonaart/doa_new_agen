@@ -60,56 +60,59 @@ class InputDescription extends StatelessWidget {
   const InputDescription({super.key});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Card(
-        color: BLUE_LIGHT,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(lampAssets),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text.rich(TextSpan(children: [
-                      TextSpan(
-                          text:
-                              InputPhoneNumberWord.kamiAkanMelakukanProses.text,
-                          style: textStyleW500(
-                              fontSize: 12, fontColor: BLUE_TEXT)),
-                      TextSpan(
-                          text:
-                              InputPhoneNumberWord.nomorAndaMemilikiPulsa.text,
-                          style:
-                              textStyleW700(fontSize: 12, fontColor: BLUE_TEXT))
-                    ])),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(keyAssets),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text.rich(TextSpan(children: [
-                      TextSpan(
-                          text: InputPhoneNumberWord.jagaKerahasiaanOTP.text,
-                          style: textStyleW700(
-                              fontSize: 12, fontColor: BLUE_TEXT)),
-                      TextSpan(
-                          text:
-                              InputPhoneNumberWord.denganTidakMemberitahu.text,
-                          style:
-                              textStyleW500(fontSize: 12, fontColor: BLUE_TEXT))
-                    ])),
-                  )
-                ],
-              )
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: SizedBox(
+        child: Card(
+          color: BLUE_LIGHT,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(lampAssets),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text.rich(TextSpan(children: [
+                        TextSpan(
+                            text: InputPhoneNumberWord
+                                .kamiAkanMelakukanProses.text,
+                            style: textStyleW500(
+                                fontSize: 12, fontColor: BLUE_TEXT)),
+                        TextSpan(
+                            text: InputPhoneNumberWord
+                                .nomorAndaMemilikiPulsa.text,
+                            style: textStyleW700(
+                                fontSize: 12, fontColor: BLUE_TEXT))
+                      ])),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(keyAssets),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text.rich(TextSpan(children: [
+                        TextSpan(
+                            text: InputPhoneNumberWord.jagaKerahasiaanOTP.text,
+                            style: textStyleW700(
+                                fontSize: 12, fontColor: BLUE_TEXT)),
+                        TextSpan(
+                            text: InputPhoneNumberWord
+                                .denganTidakMemberitahu.text,
+                            style: textStyleW500(
+                                fontSize: 12, fontColor: BLUE_TEXT))
+                      ])),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -129,58 +132,47 @@ class InputNumberPhone extends StatelessWidget {
         children: [
           Text(InputPhoneNumberWord.nomorHandphone.text,
               style: textStyleW600(fontSize: 14)),
-          Container(
-            padding: const EdgeInsets.only(bottom: 10),
-            decoration: const BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(width: 0.2, color: Colors.grey))),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                MaterialButton(
-                  padding: const EdgeInsets.all(0),
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 10,
-                        backgroundImage: AssetImage(indonesianFlagAssets),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        InputPhoneNumberWord.indonesia62.text,
-                        style: textStyleW500(fontSize: 15),
-                      ),
-                      const SizedBox(width: 14.14),
-                      Transform.rotate(
-                          angle: 15 / math.pi,
-                          child: const Icon(
-                            Icons.arrow_back_ios_new,
-                            color: ORANGE,
-                            size: 20,
-                          )),
-                    ],
+          TextFormField(
+            keyboardType: TextInputType.number,
+            style: textStyleW500(fontSize: 16),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            decoration: InputDecoration(
+                prefixIcon: Padding(
+              padding: const EdgeInsets.only(right: 18.43, bottom: 12),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  MaterialButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 10,
+                          backgroundImage: AssetImage(indonesianFlagAssets),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          InputPhoneNumberWord.indonesia62.text,
+                          style: textStyleW500(fontSize: 15),
+                        ),
+                        const SizedBox(width: 14.14),
+                        Transform.rotate(
+                            angle: 15 / math.pi,
+                            child: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: ORANGE,
+                              size: 20,
+                            )),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(width: 18.43),
-                Expanded(
-                    child: TextField(
-                  controller: _controller.numberEditingController,
-                  keyboardType: TextInputType.number,
-                  onChanged: _controller.onInputNumberChanged(),
-                  decoration:
-                      const InputDecoration(enabledBorder: InputBorder.none),
-                  style: textStyleW500(fontSize: 16),
-                )),
-                Obx(() {
-                  if (_controller.helperValidation.value) {
-                    return _controller.suffixHelperInputButton;
-                  } else {
-                    return Container();
-                  }
-                })
-              ],
-            ),
+                ],
+              ),
+            )),
+            controller: _controller.numberEditingController,
+            validator: _controller.phoneNumberValidator(),
+            onChanged: _controller.phoneNumberOnChange(),
           ),
         ],
       ),

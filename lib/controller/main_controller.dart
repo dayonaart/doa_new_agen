@@ -6,9 +6,18 @@ class MainController extends GetxController
   late AnimationController progresscontroller;
   RxDouble progress = 0.0.obs;
   RxString ktpFilePath = RxString("");
+  RxMap inputNumberData = RxMap();
+  RxMap ktpData = RxMap();
+  void setInputNumberData(Map<String, dynamic> data) {
+    inputNumberData.value = data;
+  }
 
   void setKtpFilePath(String path) {
     ktpFilePath.value = path;
+  }
+
+  void setKtpData(Map<String, dynamic> data) {
+    ktpData.value = data;
   }
 
   @override

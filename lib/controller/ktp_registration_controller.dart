@@ -32,8 +32,8 @@ class KtpRegistrationController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onReady() {
     _mController.startProgressAnim();
-    super.onInit();
+    super.onReady();
   }
 }

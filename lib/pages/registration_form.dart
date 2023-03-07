@@ -55,53 +55,28 @@ class RegistrationFormField extends StatelessWidget {
           child: Column(
             children: [
               Builder(builder: (context) {
-                if (i == 3) {
-                  return Column(
-                    children: [
-                      Container(color: GREY_BACKGROUND, height: 8),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 24),
-                            _controller.textEditingLabel(i),
-                            Obx(() {
-                              return TextField(
-                                keyboardType: _controller.textInputType(i),
-                                readOnly: true,
-                                enabled: _controller.enableEditing.value,
-                                style: textStyleW500(fontSize: 16),
-                                controller: _controller.textController(i),
-                                decoration: InputDecoration(
-                                    suffixIcon:
-                                        _controller.suffixHelperWidget(i),
-                                    border: const UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 0.5, color: GREY)),
-                                    floatingLabelStyle:
-                                        textStyleW600(fontSize: 14),
-                                    labelStyle: textStyleW600(fontSize: 14)),
-                              );
-                            })
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                }
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (i == 3)
+                        Column(
+                          children: [
+                            const SizedBox(height: 24),
+                            Container(color: GREY_BACKGROUND, height: 8),
+                            const SizedBox(height: 24)
+                          ],
+                        ),
                       _controller.textEditingLabel(i),
                       Obx(() {
-                        return TextField(
+                        return TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           readOnly: i == 2,
                           onTap: i != 2 ? null : _controller.datePicker(),
                           keyboardType: _controller.textInputType(i),
                           onChanged: _controller.formOnChange(i),
+                          validator: _controller.formValidator(i),
                           enabled: _controller.enableEditing.value,
                           style: textStyleW500(fontSize: 16),
                           controller: _controller.textController(i),

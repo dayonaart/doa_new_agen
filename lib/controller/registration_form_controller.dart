@@ -1,23 +1,32 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mobilenew/controller/main_controller.dart';
 import 'package:mobilenew/enum.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'package:mobilenew/widget/widgets.dart';
 import 'package:screenshot/screenshot.dart';
 
 class RegistrationFormController extends GetxController {
-  final _mController = Get.put(MainController());
+  final MainController _mController = Get.find();
   String get ktpPath => _mController.ktpFilePath.value;
   String get _myKtpPath => "assets/my_ktp.JPG";
   RxBool enableEditing = RxBool(false);
   Rx<Widget> ktpWidget = Rx(Container());
   DateTime? _selectedDob;
+  final _now = DateTime.now();
+  bool get _mature {
+    try {
+      return _selectedDob!.isBefore(DateTime(
+          (_now.year - 17), _now.month, _now.day, _now.hour, _now.minute));
+    } catch (e) {
+      return false;
+    }
+  }
+
   final ScreenshotController _screenshotController = ScreenshotController();
   late TextEditingController nikTextController,
       fullNameTextController,
@@ -94,26 +103,7 @@ class RegistrationFormController extends GetxController {
 
   Widget? suffixHelperWidget(int i) {
     switch (i) {
-      case 0:
-        if (!validationForm[i].value) {
-          return IconButton(
-              onPressed: _dialogHelper(i),
-              icon: const Icon(Icons.help, color: ORANGE));
-        }
-        return null;
-      case 1:
-        if (!validationForm[i].value) {
-          return IconButton(
-              onPressed: _dialogHelper(i),
-              icon: const Icon(Icons.help, color: ORANGE));
-        }
-        return null;
       case 2:
-        if (!validationForm[i].value) {
-          return IconButton(
-              onPressed: _dialogHelper(i),
-              icon: const Icon(Icons.help, color: ORANGE));
-        }
         return const Icon(Icons.date_range, color: ORANGE);
       default:
         return null;
@@ -152,7 +142,7 @@ class RegistrationFormController extends GetxController {
 
   void Function(String) fullNameOnChange() {
     return (val) {
-      if (!val.contains(nameRegExp)) {
+      if (nameRegExp.hasMatch(val)) {
         validationForm[1].value = false;
       } else {
         validationForm[1].value = true;
@@ -163,6 +153,8 @@ class RegistrationFormController extends GetxController {
   void Function(String) dobOnChange() {
     return (val) {
       if (val.isEmpty) {
+        validationForm[2].value = false;
+      } else if (!_mature) {
         validationForm[2].value = false;
       } else {
         validationForm[2].value = true;
@@ -178,6 +170,51 @@ class RegistrationFormController extends GetxController {
         return fullNameOnChange();
       case 2:
         return dobOnChange();
+      default:
+        return null;
+    }
+  }
+
+  String? Function(String?)? nikValidator() {
+    return (val) {
+      if (val!.length != 16) {
+        return "Masukan 16 digit NIK";
+      } else {
+        return null;
+      }
+    };
+  }
+
+  String? Function(String?)? fullNameValidator() {
+    return (val) {
+      if (val!.isEmpty) {
+        return "Wajib diisi";
+      } else if (nameRegExp.hasMatch(val)) {
+        return "Nama Lengkap mengandung karakter tidak valid";
+      } else {
+        return null;
+      }
+    };
+  }
+
+  String? Function(String?)? dobValidator() {
+    return (val) {
+      if (!_mature) {
+        return "Usia Anda belum memenuhi syarat";
+      } else {
+        return null;
+      }
+    };
+  }
+
+  String? Function(String?)? formValidator(int i) {
+    switch (i) {
+      case 0:
+        return nikValidator();
+      case 1:
+        return fullNameValidator();
+      case 2:
+        return dobValidator();
       default:
         return null;
     }
@@ -242,7 +279,6 @@ class RegistrationFormController extends GetxController {
 
   @override
   void onInit() {
-    _mController.startProgressAnim();
     nikTextController = TextEditingController();
     fullNameTextController = TextEditingController();
     dobTextController = TextEditingController();
@@ -255,6 +291,7 @@ class RegistrationFormController extends GetxController {
 
   @override
   void onReady() async {
+    _mController.startProgressAnim();
     await _cropKtpImage();
     super.onReady();
   }
@@ -264,7 +301,14 @@ class RegistrationFormController extends GetxController {
       return null;
     }
     return () async {
-      print("NEXT");
+      final _payload = {
+        'nik': nikTextController.text,
+        'full_name': fullNameTextController.text,
+        'dob': dobTextController.text,
+        'referral_code': referalCodeTextController.text
+      };
+      _mController.setKtpData(_payload);
+      await Get.toNamed(ROUTE.registrationFormPrivate.name);
     };
   }
 }
