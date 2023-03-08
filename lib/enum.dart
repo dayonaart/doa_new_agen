@@ -1,12 +1,32 @@
-final RegExp nameRegExp = RegExp(r'[{}+!@#$%^&*()?><,./\;@=_0-9-]');
-final RegExp onlyTextRegExpAndNumber = RegExp(r'[{}+!@#$%^&*()?><,./\;@=_-]');
-RegExp phoneRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
+extension PersonNameValidator on String {
+  bool isNotValidPersonName() {
+    return RegExp(r'[{}+!@#$%^&*()?><,./\;@=_0-9-]').hasMatch(this);
+  }
+}
+
+extension OnlyTextAndNumberValidator on String {
+  bool isValidTextAndNumber() {
+    return RegExp(r'[{}+!@#$%^&*()?><,./\;@=_-]').hasMatch(this);
+  }
+}
 
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
         .hasMatch(this);
+  }
+}
+
+extension PhoneValidator on String {
+  bool isValidPhone() {
+    return RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(this);
+  }
+}
+
+extension NpwpValidator on String {
+  bool isValidNpwp() {
+    return RegExp(r'(^(?:[+0]9)?[0-9]{16}$)').hasMatch(this);
   }
 }
 
@@ -435,7 +455,7 @@ enum RegistrationFormPrivateLabel {
   namaIbuKandung,
 }
 
-extension FormTitle on RegistrationFormPrivateLabel {
+extension FormPrivateTitle on RegistrationFormPrivateLabel {
   String get title {
     switch (this) {
       case RegistrationFormPrivateLabel.namaLengkap:
@@ -478,6 +498,48 @@ extension FormTitle on RegistrationFormPrivateLabel {
         return "Status Perkawinan";
       case RegistrationFormPrivateLabel.namaIbuKandung:
         return "Nama Ibu Kandung";
+      default:
+        return "";
+    }
+  }
+}
+
+enum RegistrationFormJobDetailLabel {
+  pekerjaan,
+  penghasilanPerbulan,
+  sumberDana,
+  perkiraanNilaiTransaksi,
+  tujuanPembukaanRekening,
+  jabatan,
+  namaTempatKerjaPerusahaan,
+  noTeleponTempatBekerja,
+  alamatTempatKerja,
+  kodePos,
+}
+
+extension FormJobTitle on RegistrationFormJobDetailLabel {
+  String get title {
+    switch (this) {
+      case RegistrationFormJobDetailLabel.pekerjaan:
+        return "Pekerjaan";
+      case RegistrationFormJobDetailLabel.penghasilanPerbulan:
+        return "Penghasilan Perbulan";
+      case RegistrationFormJobDetailLabel.sumberDana:
+        return "Sumber Dana";
+      case RegistrationFormJobDetailLabel.perkiraanNilaiTransaksi:
+        return "Perkiraan Nilai Transaksi";
+      case RegistrationFormJobDetailLabel.tujuanPembukaanRekening:
+        return "Tujuan Pembukaan Rekening";
+      case RegistrationFormJobDetailLabel.jabatan:
+        return "Jabatan";
+      case RegistrationFormJobDetailLabel.namaTempatKerjaPerusahaan:
+        return "Nama Tempat Kerja Perusahaan";
+      case RegistrationFormJobDetailLabel.noTeleponTempatBekerja:
+        return "No.Telepon Tempat Bekerja";
+      case RegistrationFormJobDetailLabel.alamatTempatKerja:
+        return "Alamat Tempat Kerja";
+      case RegistrationFormJobDetailLabel.kodePos:
+        return "Kode Pos";
       default:
         return "";
     }

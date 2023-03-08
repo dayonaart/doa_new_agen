@@ -5,9 +5,21 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class RegistrationFormOfficeBranch extends StatelessWidget {
   RegistrationFormOfficeBranch({super.key});
+  // ignore: unused_field
   final _controller = Get.put(RegistrationFormOfficeBranchController());
   @override
   Widget build(BuildContext context) {
-    return SAFE_AREA(child: SCAFFOLD(body: Center()));
+    return SAFE_AREA(
+        child: SCAFFOLD(
+            appBar: APPBAR(
+                onPressed: () => Get.back(),
+                title: "Registrasi",
+                progressData: 6),
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(_controller.data),
+              ),
+            )));
   }
 }

@@ -12,6 +12,7 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class TakeCameraKtp extends StatelessWidget {
   TakeCameraKtp({super.key});
+  // ignore: unused_field
   final _controller = Get.put(TakeCameraKtpController());
   @override
   Widget build(BuildContext context) {

@@ -56,175 +56,21 @@ class RegistrationFormPrivateController extends GetxController {
       mothersNameTxtController; //19
 
   Widget textEditingLabel(int i) {
-    switch (i) {
-      case 0:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.namaLengkap.title,
-            style: textStyleW600(fontSize: 14, fontColor: GREY),
-          ),
+    switch (i != 16 && i != 17) {
+      case true:
+        return Text(
+          RegistrationFormPrivateLabel.values[i].title,
+          style: textStyleW600(fontSize: 14, fontColor: GREY),
         );
-      case 1:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.tempatLahir.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 2:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.tanggalLahir.title,
-            style: textStyleW600(fontSize: 14, fontColor: GREY),
-          ),
-        );
-      case 3:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.jenisKelamin.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 4:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.alamat.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 5:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.rt.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 6:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.rw.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 7:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.provonsi.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 8:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.kotaKabupaten.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 9:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.kecamatan.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 10:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.desaKelurahan.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 11:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.agama.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 12:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.kodePos.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 13:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.kotaPenerbitIndentitas.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 14:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.email.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 15:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.nomorTelepon.title,
-            style: textStyleW600(fontSize: 14, fontColor: GREY),
-          ),
-        );
-      case 16:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text.rich(TextSpan(children: [
-            TextSpan(
-                text: RegistrationFormPrivateLabel.nomorTeleponRumah.title,
-                style: textStyleW600(fontSize: 14)),
-            TextSpan(
-                text: " (Opsional)",
-                style: textStyleW500(fontSize: 14, fontColor: GREY)),
-          ])),
-        );
-      case 17:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text.rich(TextSpan(children: [
-            TextSpan(
-                text: RegistrationFormPrivateLabel.nomorNpwp.title,
-                style: textStyleW600(fontSize: 14)),
-            TextSpan(
-                text: " (Opsional)",
-                style: textStyleW500(fontSize: 14, fontColor: GREY)),
-          ])),
-        );
-      case 18:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.statusPerkawinan.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
-      case 19:
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            RegistrationFormPrivateLabel.namaIbuKandung.title,
-            style: textStyleW600(fontSize: 14),
-          ),
-        );
+      case false:
+        return Text.rich(TextSpan(children: [
+          TextSpan(
+              text: RegistrationFormPrivateLabel.values[i].title,
+              style: textStyleW600(fontSize: 14)),
+          TextSpan(
+              text: " (Opsional)",
+              style: textStyleW500(fontSize: 14, fontColor: GREY)),
+        ]));
 
       default:
         return Container();
@@ -295,39 +141,39 @@ class RegistrationFormPrivateController extends GetxController {
             suffixIcon: suffixIcon(),
             hintText:
                 "Pilih ${RegistrationFormPrivateLabel.jenisKelamin.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       case 7:
         return InputDecoration(
             suffixIcon: suffixIcon(),
             hintText: "Pilih ${RegistrationFormPrivateLabel.provonsi.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       case 8:
         return InputDecoration(
             suffixIcon: suffixIcon(),
             hintText:
                 "Pilih ${RegistrationFormPrivateLabel.kotaKabupaten.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       case 9:
         return InputDecoration(
             suffixIcon: suffixIcon(),
             hintText: "Pilih ${RegistrationFormPrivateLabel.kecamatan.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       case 11:
         return InputDecoration(
             suffixIcon: suffixIcon(),
             hintText: "Pilih ${RegistrationFormPrivateLabel.agama.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       case 12:
         return InputDecoration(
             suffixIcon: suffixIcon(),
             hintText: "Pilih ${RegistrationFormPrivateLabel.kodePos.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       case 18:
         return InputDecoration(
             suffixIcon: suffixIcon(),
             hintText:
                 "Pilih ${RegistrationFormPrivateLabel.statusPerkawinan.title}",
-            hintStyle: textStyleW600(fontColor: GREY));
+            hintStyle: textStyleW500(fontColor: GREY, fontSize: 16));
       default:
         return null;
     }
@@ -447,79 +293,53 @@ class RegistrationFormPrivateController extends GetxController {
         return (item) {
           genderTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
-          onchangeForm(i)?.call(genderTxtController.text);
+          onChangeForm(i)?.call(genderTxtController.text);
         };
       case 7:
         return (item) async {
-          onchangeForm(i + 1)?.call("");
-          onchangeForm(i + 2)?.call("");
+          onChangeForm(i + 1)?.call("");
+          onChangeForm(i + 2)?.call("");
           provinceTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
           await _findSubdistrict();
-          onchangeForm(i)?.call(provinceTxtController.text);
+          onChangeForm(i)?.call(provinceTxtController.text);
         };
       case 8:
         return (item) async {
-          onchangeForm(i + 1)?.call("");
+          onChangeForm(i + 1)?.call("");
           subdistrictTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
           await _findRegency();
-          onchangeForm(i)?.call(subdistrictTxtController.text);
+          onChangeForm(i)?.call(subdistrictTxtController.text);
         };
       case 9:
         return (item) {
-          onchangeForm(i + 1)?.call(subdistrictTxtController.text);
+          onChangeForm(i + 1)?.call(subdistrictTxtController.text);
           regencyTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
-          onchangeForm(i)?.call(regencyTxtController.text);
+          onChangeForm(i)?.call(regencyTxtController.text);
         };
       case 11:
         return (item) {
           religionTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
-          onchangeForm(i)?.call(religionTxtController.text);
+          onChangeForm(i)?.call(religionTxtController.text);
         };
       case 12:
         return (item) {
           postalCodeTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
-          onchangeForm(i)?.call(postalCodeTxtController.text);
+          onChangeForm(i)?.call(postalCodeTxtController.text);
         };
       case 18:
         return (item) {
           maritalStatusTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
-          onchangeForm(i)?.call(maritalStatusTxtController.text);
+          onChangeForm(i)?.call(maritalStatusTxtController.text);
         };
       default:
         return null;
     }
-  }
-
-  Future<void> _findSubdistrict() async {
-    subDistrictList.value = [];
-    regencyList.value = [];
-    subdistrictTxtController.clear();
-    regencyTxtController.clear();
-    var _i_ =
-        provinceList.indexWhere((e) => e!.nama == provinceTxtController.text);
-    var payload = provinceList[_i_]?.id;
-    var getSubDistrict = (await Api().GET("kota?id_provinsi=$payload")
-        as Map<String, dynamic>)['kota_kabupaten'] as List<dynamic>;
-    subDistrictList.value = List.generate((getSubDistrict).length,
-        (index) => AddressModel.fromJson(getSubDistrict[index]));
-  }
-
-  Future<void> _findRegency() async {
-    regencyList.value = [];
-    regencyTxtController.clear();
-    var _i_ = subDistrictList
-        .indexWhere((e) => e!.nama == subdistrictTxtController.text);
-    var payload = subDistrictList[_i_]?.id;
-    var getRegency = (await Api().GET("kecamatan?id_kota=$payload")
-        as Map<String, dynamic>)['kecamatan'] as List<dynamic>;
-    regencyList.value = List.generate((getRegency).length,
-        (index) => AddressModel.fromJson(getRegency[index]));
   }
 
   void Function()? dropDownSelecting(int i, String title) {
@@ -531,7 +351,7 @@ class RegistrationFormPrivateController extends GetxController {
             data: selectedListItem(i)!,
             selectedItems: selectedItem(i),
             enableMultipleSelection: false,
-            isExpanded: (i == 3 || i == 18) ? false : true),
+            isExpanded: selectedListItem(i)!.length <= 4 ? false : true),
       ).showModal(Get.context);
     };
   }
@@ -558,7 +378,7 @@ class RegistrationFormPrivateController extends GetxController {
           if (val!.isEmpty) {
             return "${RegistrationFormPrivateLabel.values[i].title} Wajib diisi";
           } else if (!val.isValidEmail()) {
-            return "Email tidak valid";
+            return "${RegistrationFormPrivateLabel.values[i].title}  tidak valid";
           } else {
             return null;
           }
@@ -569,15 +389,15 @@ class RegistrationFormPrivateController extends GetxController {
         };
       case 16:
         return (val) {
-          if (val!.isNotEmpty && !phoneRegExp.hasMatch(val)) {
-            return "Nomer Telepon tidak valid";
+          if (val!.isNotEmpty && !val.isValidPhone()) {
+            return "${RegistrationFormPrivateLabel.values[i].title}  tidak valid";
           }
           return null;
         };
       case 17:
         return (val) {
-          if (val!.isNotEmpty && val.length != 16) {
-            return "Nomor NPWP 16 digit";
+          if (val!.isNotEmpty && !val.isValidNpwp()) {
+            return "Masukan 16 digit Nomor NPWP";
           }
           return null;
         };
@@ -585,7 +405,7 @@ class RegistrationFormPrivateController extends GetxController {
         return (val) {
           if (val!.isEmpty) {
             return "${RegistrationFormPrivateLabel.values[i].title} Wajib diisi";
-          } else if (onlyTextRegExpAndNumber.hasMatch(val)) {
+          } else if (val.isValidTextAndNumber()) {
             return "Terdapat karakter tidak valid";
           }
           return null;
@@ -593,7 +413,7 @@ class RegistrationFormPrivateController extends GetxController {
     }
   }
 
-  void Function(String?)? onchangeForm(int i) {
+  void Function(String?)? onChangeForm(int i) {
     switch (i) {
       case 14:
         return (val) {
@@ -607,7 +427,7 @@ class RegistrationFormPrivateController extends GetxController {
         };
       case 16:
         return (val) {
-          if (val!.isNotEmpty && !phoneRegExp.hasMatch(val)) {
+          if (val!.isNotEmpty && !val.isValidPhone()) {
             validationForm[i].value = false;
           } else {
             validationForm[i].value = true;
@@ -615,7 +435,7 @@ class RegistrationFormPrivateController extends GetxController {
         };
       case 17:
         return (val) {
-          if (val!.isNotEmpty && val.length != 16) {
+          if (val!.isNotEmpty && !val.isValidNpwp()) {
             validationForm[i].value = false;
           } else {
             validationForm[i].value = true;
@@ -626,7 +446,7 @@ class RegistrationFormPrivateController extends GetxController {
         return (val) {
           if (val == "") {
             validationForm[i].value = false;
-          } else if (onlyTextRegExpAndNumber.hasMatch(val!)) {
+          } else if (val!.isValidTextAndNumber()) {
             validationForm[i].value = false;
           } else {
             validationForm[i].value = true;
@@ -660,6 +480,32 @@ class RegistrationFormPrivateController extends GetxController {
     maritalStatusTxtController = TextEditingController();
     mothersNameTxtController = TextEditingController();
     super.onInit();
+  }
+
+  Future<void> _findSubdistrict() async {
+    subDistrictList.value = [];
+    regencyList.value = [];
+    subdistrictTxtController.clear();
+    regencyTxtController.clear();
+    var _i_ =
+        provinceList.indexWhere((e) => e!.nama == provinceTxtController.text);
+    var payload = provinceList[_i_]?.id;
+    var getSubDistrict = (await Api().GET("kota?id_provinsi=$payload")
+        as Map<String, dynamic>)['kota_kabupaten'] as List<dynamic>;
+    subDistrictList.value = List.generate((getSubDistrict).length,
+        (index) => AddressModel.fromJson(getSubDistrict[index]));
+  }
+
+  Future<void> _findRegency() async {
+    regencyList.value = [];
+    regencyTxtController.clear();
+    var _i_ = subDistrictList
+        .indexWhere((e) => e!.nama == subdistrictTxtController.text);
+    var payload = subDistrictList[_i_]?.id;
+    var getRegency = (await Api().GET("kecamatan?id_kota=$payload")
+        as Map<String, dynamic>)['kecamatan'] as List<dynamic>;
+    regencyList.value = List.generate((getRegency).length,
+        (index) => AddressModel.fromJson(getRegency[index]));
   }
 
   @override

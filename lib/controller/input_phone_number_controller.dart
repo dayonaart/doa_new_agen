@@ -69,7 +69,7 @@ class InputPhoneNumberController extends GetxController {
     return (val) {
       if (val!.isEmpty) {
         return "Nomor Handphone wajib diisi";
-      } else if (!phoneRegExp.hasMatch(val)) {
+      } else if (!val.isValidPhone()) {
         return "Pastikan Nomor Handphone Anda sudah benar";
       } else {
         return null;
@@ -81,7 +81,7 @@ class InputPhoneNumberController extends GetxController {
     return (val) {
       if (val!.isEmpty) {
         numberValidation.value = false;
-      } else if (!phoneRegExp.hasMatch(val)) {
+      } else if (!val.isValidPhone()) {
         numberValidation.value = false;
       } else {
         numberValidation.value = true;

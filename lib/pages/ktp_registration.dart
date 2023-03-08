@@ -11,6 +11,7 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class KtpRegistration extends StatelessWidget {
   KtpRegistration({super.key});
+  // ignore: unused_field
   final _controller = Get.put(KtpRegistrationController());
   @override
   Widget build(BuildContext context) {

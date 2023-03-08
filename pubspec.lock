@@ -116,9 +116,11 @@ packages:
   drop_down_list:
     dependency: "direct main"
     description:
-      path: "/home/dayona/Desktop/drop_down_list"
-      relative: false
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: f65c9fcea5b3a40c767832b5f4487f3238a245f6
+      url: "https://github.com/dayonaart/drop_down_list"
+    source: git
     version: "0.0.1"
   fake_async:
     dependency: transitive

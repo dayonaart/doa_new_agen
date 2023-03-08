@@ -9,6 +9,8 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class RegistrationFormPrivate extends StatelessWidget {
   RegistrationFormPrivate({super.key});
+
+  // ignore: unused_field
   final _controller = Get.put(RegistrationFormPrivateController());
   @override
   Widget build(BuildContext context) {
@@ -77,10 +79,11 @@ class PrivateRegistrationField extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               _controller.textEditingLabel(i),
+                              const SizedBox(height: 8),
                               TextFormField(
                                   autovalidateMode: AutovalidateMode.always,
                                   validator: _controller.onValidateForm(i),
-                                  onChanged: _controller.onchangeForm(i),
+                                  onChanged: _controller.onChangeForm(i),
                                   keyboardType: _controller.textInputType(i),
                                   onTap: _controller.onFieldTap(i),
                                   decoration: _controller.inputDecoration(i),
@@ -143,10 +146,11 @@ class PrivateRegistrationRtRwField extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _controller.textEditingLabel(index == 0 ? i : 6),
+                  const SizedBox(height: 8),
                   TextFormField(
                       autovalidateMode: AutovalidateMode.always,
                       validator: _controller.onValidateForm(index == 0 ? i : 6),
-                      onChanged: _controller.onchangeForm(index == 0 ? i : 6),
+                      onChanged: _controller.onChangeForm(index == 0 ? i : 6),
                       keyboardType: _controller.textInputType(i),
                       onTap: _controller.onFieldTap(index == 0 ? i : 6),
                       decoration:

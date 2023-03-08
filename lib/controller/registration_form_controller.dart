@@ -8,7 +8,6 @@ import 'package:mobilenew/enum.dart';
 import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
-import 'package:mobilenew/widget/widgets.dart';
 import 'package:screenshot/screenshot.dart';
 
 class RegistrationFormController extends GetxController {
@@ -111,29 +110,11 @@ class RegistrationFormController extends GetxController {
     }
   }
 
-  void Function()? _dialogHelper(int i) {
-    switch (i) {
-      case 0:
-        return () async {
-          await DIALOG_HELPER("Masukan 16 Digit NIK");
-        };
-      case 1:
-        return () async {
-          await DIALOG_HELPER(
-              "Nama Lengkap tidak boleh berisi karakter invalid");
-        };
-      case 2:
-        return () async {
-          await DIALOG_HELPER("Masukan Tanggal Lahir");
-        };
-      default:
-        return null;
-    }
-  }
-
   void Function(String) nikOnChange() {
     return (val) {
-      if (val.length != 16) {
+      if (val.isEmpty) {
+        validationForm[0].value = false;
+      } else if (!val.isValidNpwp()) {
         validationForm[0].value = false;
       } else {
         validationForm[0].value = true;
@@ -143,7 +124,9 @@ class RegistrationFormController extends GetxController {
 
   void Function(String) fullNameOnChange() {
     return (val) {
-      if (nameRegExp.hasMatch(val)) {
+      if (val.isEmpty) {
+        validationForm[1].value = false;
+      } else if (val.isNotValidPersonName()) {
         validationForm[1].value = false;
       } else {
         validationForm[1].value = true;
@@ -178,7 +161,7 @@ class RegistrationFormController extends GetxController {
 
   String? Function(String?)? nikValidator() {
     return (val) {
-      if (val!.length != 16) {
+      if (!val!.isValidNpwp()) {
         return "Masukan 16 digit NIK";
       } else {
         return null;
@@ -190,7 +173,7 @@ class RegistrationFormController extends GetxController {
     return (val) {
       if (val!.isEmpty) {
         return "Wajib diisi";
-      } else if (nameRegExp.hasMatch(val)) {
+      } else if (val.isNotValidPersonName()) {
         return "Nama Lengkap mengandung karakter tidak valid";
       } else {
         return null;

@@ -11,6 +11,7 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class InputPhoneNumber extends StatelessWidget {
   InputPhoneNumber({super.key});
+  // ignore: unused_field
   final _controller = Get.put(InputPhoneNumberController());
   @override
   Widget build(BuildContext context) {

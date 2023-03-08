@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/controller/main_controller.dart';
@@ -32,12 +34,13 @@ Scaffold SCAFFOLD({
   );
 }
 
-AppBar APPBAR(
-    {required void Function()? onPressed,
-    @required String? title,
-    IconData? icon,
-    int? progressData,
-    bool centerTitle = true}) {
+AppBar APPBAR({
+  required void Function()? onPressed,
+  @required String? title,
+  IconData? icon,
+  int? progressData,
+  bool centerTitle = true,
+}) {
   // print(Get.currentRoute);
   assert(title != null);
   return AppBar(
@@ -120,7 +123,7 @@ PreferredSize PROGRESS_BAR_DATA(int progressData) {
             children: [
               Container(width: Get.width, color: GREY_BACKGROUND, height: 5),
               SizedBox(
-                  width: Get.width / 10 * progressData,
+                  width: Get.width / 12 * progressData,
                   height: 5,
                   child: Obx(() => LinearProgressIndicator(
                         color: ORANGE,

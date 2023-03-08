@@ -8,6 +8,7 @@ class MainController extends GetxController
   RxString ktpFilePath = RxString("");
   RxMap inputNumberData = RxMap();
   RxMap privateFormData = RxMap();
+  RxMap jobDetailFormData = RxMap();
   RxMap ktpData = RxMap();
   void setInputNumberData(Map<String, dynamic> data) {
     inputNumberData.value = data;
@@ -23,6 +24,10 @@ class MainController extends GetxController
 
   void setPrivateFormData(Map<String, dynamic> data) {
     privateFormData.value = data;
+  }
+
+  void setJobDetailFormData(Map<String, dynamic> data) {
+    jobDetailFormData.value = data;
   }
 
   @override
