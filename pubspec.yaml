@@ -39,7 +39,8 @@ dependencies:
   get: ^4.6.5
   dio: ^5.0.1
   carousel_slider: ^4.2.1 
-  drop_down_list: ^0.0.4
+  drop_down_list:
+    path : /home/dayona/Desktop/drop_down_list
   # google_mlkit_text_recognition: ^0.5.0
   camera: ^0.10.3+2
   # camera:

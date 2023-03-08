@@ -116,11 +116,10 @@ packages:
   drop_down_list:
     dependency: "direct main"
     description:
-      name: drop_down_list
-      sha256: c4f0529fca9516f35037d0b53737a647a79716040e994e121486102f3efcc1ab
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.4"
+      path: "/home/dayona/Desktop/drop_down_list"
+      relative: false
+    source: path
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:

@@ -1,5 +1,14 @@
 final RegExp nameRegExp = RegExp(r'[{}+!@#$%^&*()?><,./\;@=_0-9-]');
+final RegExp onlyTextRegExpAndNumber = RegExp(r'[{}+!@#$%^&*()?><,./\;@=_-]');
 RegExp phoneRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
+  }
+}
 
 enum OnBoardingWord {
   tungguApalagi,
@@ -397,6 +406,78 @@ extension FeatureExpandDesc on FeatureExpandListDesc {
         return "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
       case FeatureExpandListDesc.desc3:
         return "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of section 1.10.32.";
+      default:
+        return "";
+    }
+  }
+}
+
+enum RegistrationFormPrivateLabel {
+  namaLengkap,
+  tempatLahir,
+  tanggalLahir,
+  jenisKelamin,
+  alamat,
+  rt,
+  rw,
+  provonsi,
+  kotaKabupaten,
+  kecamatan,
+  desaKelurahan,
+  agama,
+  kodePos,
+  kotaPenerbitIndentitas,
+  email,
+  nomorTelepon,
+  nomorTeleponRumah,
+  nomorNpwp,
+  statusPerkawinan,
+  namaIbuKandung,
+}
+
+extension FormTitle on RegistrationFormPrivateLabel {
+  String get title {
+    switch (this) {
+      case RegistrationFormPrivateLabel.namaLengkap:
+        return "Nama Lengkap";
+      case RegistrationFormPrivateLabel.tempatLahir:
+        return "Tempat Lahir";
+      case RegistrationFormPrivateLabel.tanggalLahir:
+        return "Tanggal Lahir";
+      case RegistrationFormPrivateLabel.jenisKelamin:
+        return "Jenis Kelamin";
+      case RegistrationFormPrivateLabel.alamat:
+        return "Alamat";
+      case RegistrationFormPrivateLabel.rt:
+        return "RT";
+      case RegistrationFormPrivateLabel.rw:
+        return "RW";
+      case RegistrationFormPrivateLabel.provonsi:
+        return "Provinsi";
+      case RegistrationFormPrivateLabel.kotaKabupaten:
+        return "Kota / Kabupaten";
+      case RegistrationFormPrivateLabel.kecamatan:
+        return "Kecamatan";
+      case RegistrationFormPrivateLabel.desaKelurahan:
+        return "Desa / Kelurahan";
+      case RegistrationFormPrivateLabel.agama:
+        return "Agama";
+      case RegistrationFormPrivateLabel.kodePos:
+        return "Kode Pos";
+      case RegistrationFormPrivateLabel.kotaPenerbitIndentitas:
+        return "Kota Penerbit Identitas";
+      case RegistrationFormPrivateLabel.email:
+        return "Email";
+      case RegistrationFormPrivateLabel.nomorTelepon:
+        return "Nomor Telepon";
+      case RegistrationFormPrivateLabel.nomorTeleponRumah:
+        return "Nomor Telepon Rumah";
+      case RegistrationFormPrivateLabel.nomorNpwp:
+        return "Nomor NPWP";
+      case RegistrationFormPrivateLabel.statusPerkawinan:
+        return "Status Perkawinan";
+      case RegistrationFormPrivateLabel.namaIbuKandung:
+        return "Nama Ibu Kandung";
       default:
         return "";
     }

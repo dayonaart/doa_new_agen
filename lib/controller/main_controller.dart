@@ -7,6 +7,7 @@ class MainController extends GetxController
   RxDouble progress = 0.0.obs;
   RxString ktpFilePath = RxString("");
   RxMap inputNumberData = RxMap();
+  RxMap privateFormData = RxMap();
   RxMap ktpData = RxMap();
   void setInputNumberData(Map<String, dynamic> data) {
     inputNumberData.value = data;
@@ -18,6 +19,10 @@ class MainController extends GetxController
 
   void setKtpData(Map<String, dynamic> data) {
     ktpData.value = data;
+  }
+
+  void setPrivateFormData(Map<String, dynamic> data) {
+    privateFormData.value = data;
   }
 
   @override

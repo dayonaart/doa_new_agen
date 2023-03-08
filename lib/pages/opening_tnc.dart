@@ -49,21 +49,23 @@ class TncAgreementButton extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Obx(() => Container(
-                            height: 16,
-                            width: 16,
-                            decoration: BoxDecoration(
-                                border: Border.all(width: 0.5),
-                                borderRadius: BorderRadius.circular(3),
-                                color: _controller.btnColor[i]),
-                            child: const Center(
-                              child: Icon(
-                                Icons.check,
-                                size: 6,
-                                color: Colors.white,
-                              ),
+                      Obx(() {
+                        return Container(
+                          height: 16,
+                          width: 16,
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 0.5),
+                              borderRadius: BorderRadius.circular(3),
+                              color: _controller.btnColor[i]),
+                          child: const Center(
+                            child: Icon(
+                              Icons.check,
+                              size: 6,
+                              color: Colors.white,
                             ),
-                          )),
+                          ),
+                        );
+                      }),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text.rich(TextSpan(children: [
@@ -83,16 +85,18 @@ class TncAgreementButton extends StatelessWidget {
             }),
           ),
           const SizedBox(height: 48),
-          Obx(() => BUTTON(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(
-                  OpeningTncWord.lanjut.text,
-                  style: textStyleW600(fontSize: 16, fontColor: Colors.white),
+          Obx(() {
+            return BUTTON(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    OpeningTncWord.lanjut.text,
+                    style: textStyleW600(fontSize: 16, fontColor: Colors.white),
+                  ),
                 ),
-              ),
-              onPressed: _controller.next(),
-              radiusCircular: 999)),
+                onPressed: _controller.next(),
+                radiusCircular: 999);
+          }),
           const SizedBox(height: 39),
         ],
       ),

@@ -70,7 +70,7 @@ class OpeningTncController extends GetxController
   }
 
   void Function()? next() {
-    if (tncBtn.contains(RxBool(false))) {
+    if (!tncBtn[0].value) {
       return null;
     }
     return () async {

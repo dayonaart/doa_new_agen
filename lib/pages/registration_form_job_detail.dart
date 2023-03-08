@@ -8,6 +8,13 @@ class RegistrationFormJobDetail extends StatelessWidget {
   final _controller = Get.put(RegistrationFormJobDetailController());
   @override
   Widget build(BuildContext context) {
-    return SAFE_AREA(child: SCAFFOLD(body: Center()));
+    return SAFE_AREA(
+        child: SCAFFOLD(
+      body: Center(
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(_controller.data),
+      )),
+    ));
   }
 }

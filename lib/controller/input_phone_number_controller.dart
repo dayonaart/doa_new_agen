@@ -43,24 +43,24 @@ class InputPhoneNumberController extends GetxController {
     return () {
       DropDownState(
         DropDown(
-          bottomSheetTitle: Text(
-            InputPhoneNumberWord.pilihNegara.text,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
+            bottomSheetTitle: Text(
+              InputPhoneNumberWord.pilihNegara.text,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
             ),
-          ),
-          submitButtonChild: Text(
-            InputPhoneNumberWord.selesai.text,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+            submitButtonChild: Text(
+              InputPhoneNumberWord.selesai.text,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          data: selectedListItem,
-          selectedItems: (s) => selectedItem(s.map((e) => e).toList()),
-          enableMultipleSelection: false,
-        ),
+            data: selectedListItem,
+            selectedItems: (s) => selectedItem(s.map((e) => e).toList()),
+            enableMultipleSelection: false,
+            isExpanded: true),
       ).showModal(context);
     };
   }

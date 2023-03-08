@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilenew/api/api.dart';
 import 'package:mobilenew/controller/main_controller.dart';
+import 'package:mobilenew/enum.dart';
+import 'package:mobilenew/routes.dart';
 import 'package:mobilenew/style/colors.dart';
 import 'package:mobilenew/style/textstyle.dart';
 import 'dart:math' as math;
@@ -13,27 +15,45 @@ class RegistrationFormPrivateController extends GetxController {
   RxList<AddressModel?> provinceList = RxList();
   RxList<AddressModel?> subDistrictList = RxList();
   RxList<AddressModel?> regencyList = RxList();
-  int totalField = 20;
-  late TextEditingController fullNameTxtController,
-      pobTxtController,
-      dobTxtController,
-      genderTxtController,
-      addressTxtController,
-      rtTxtController,
-      rwTxtController,
-      provinceTxtController,
-      subdistrictTxtController,
-      regencyTxtController,
-      villageTxtController,
-      religionTxtController,
-      postalCodoTxtController,
-      issuanceCityTxtController,
-      emailTxtController,
-      phoneNumberTxtController,
-      phoneHouseTxtController,
-      npwpTxtController,
-      maritalStatusTxtController,
-      mothersNameTxtController;
+  List<RxBool> validationForm =
+      List.generate(RegistrationFormPrivateLabel.values.length, (i) {
+    switch (i) {
+      case 0:
+        return RxBool(true);
+      case 2:
+        return RxBool(true);
+      case 14:
+        return RxBool(true);
+      case 15:
+        return RxBool(true);
+      case 16:
+        return RxBool(true);
+      case 17:
+        return RxBool(true);
+      default:
+        return RxBool(false);
+    }
+  });
+  late TextEditingController fullNameTxtController, //0
+      pobTxtController, //1
+      dobTxtController, //2
+      genderTxtController, //3
+      addressTxtController, //4
+      rtTxtController, //5
+      rwTxtController, //6
+      provinceTxtController, //7
+      subdistrictTxtController, //8
+      regencyTxtController, //9
+      villageTxtController, //10
+      religionTxtController, //11
+      postalCodeTxtController, //12
+      issuanceCityTxtController, //13
+      emailTxtController, //14
+      phoneNumberTxtController, //15
+      phoneHouseTxtController, //16
+      npwpTxtController, //17
+      maritalStatusTxtController, //18
+      mothersNameTxtController; //19
 
   Widget textEditingLabel(int i) {
     switch (i) {
@@ -41,128 +61,128 @@ class RegistrationFormPrivateController extends GetxController {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Nama Lengkap",
-            style: textStyleW600(fontSize: 16, fontColor: GREY),
+            RegistrationFormPrivateLabel.namaLengkap.title,
+            style: textStyleW600(fontSize: 14, fontColor: GREY),
           ),
         );
       case 1:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Tempat Lahir",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.tempatLahir.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 2:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Tanggal Lahir",
-            style: textStyleW600(fontSize: 16, fontColor: GREY),
+            RegistrationFormPrivateLabel.tanggalLahir.title,
+            style: textStyleW600(fontSize: 14, fontColor: GREY),
           ),
         );
       case 3:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Jenis Kelamin",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.jenisKelamin.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 4:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Alamat",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.alamat.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 5:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "RT",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.rt.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 6:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "RW",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.rw.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 7:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "PROVINSI",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.provonsi.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 8:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Kota / Kabupaten",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.kotaKabupaten.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 9:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Kecamatan",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.kecamatan.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 10:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Desa / Kelurahan",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.desaKelurahan.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 11:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Agama",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.agama.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 12:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Kode Pos",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.kodePos.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 13:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Kota Penerbit Identitas",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.kotaPenerbitIndentitas.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 14:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Email",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.email.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 15:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Nomor Telepon",
-            style: textStyleW600(fontSize: 16, fontColor: GREY),
+            RegistrationFormPrivateLabel.nomorTelepon.title,
+            style: textStyleW600(fontSize: 14, fontColor: GREY),
           ),
         );
       case 16:
@@ -170,37 +190,39 @@ class RegistrationFormPrivateController extends GetxController {
           padding: const EdgeInsets.only(bottom: 8),
           child: Text.rich(TextSpan(children: [
             TextSpan(
-                text: "Nomor Telepon Rumah ",
-                style: textStyleW600(fontSize: 16)),
+                text: RegistrationFormPrivateLabel.nomorTeleponRumah.title,
+                style: textStyleW600(fontSize: 14)),
             TextSpan(
-                text: "(Opsional)",
-                style: textStyleW500(fontSize: 16, fontColor: GREY)),
+                text: " (Opsional)",
+                style: textStyleW500(fontSize: 14, fontColor: GREY)),
           ])),
         );
       case 17:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text.rich(TextSpan(children: [
-            TextSpan(text: "Nomor NPWP ", style: textStyleW600(fontSize: 16)),
             TextSpan(
-                text: "(Opsional)",
-                style: textStyleW500(fontSize: 16, fontColor: GREY)),
+                text: RegistrationFormPrivateLabel.nomorNpwp.title,
+                style: textStyleW600(fontSize: 14)),
+            TextSpan(
+                text: " (Opsional)",
+                style: textStyleW500(fontSize: 14, fontColor: GREY)),
           ])),
         );
       case 18:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Status Perkawinan",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.statusPerkawinan.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
       case 19:
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            "Nama Ibu Kandung",
-            style: textStyleW600(fontSize: 16),
+            RegistrationFormPrivateLabel.namaIbuKandung.title,
+            style: textStyleW600(fontSize: 14),
           ),
         );
 
@@ -236,7 +258,7 @@ class RegistrationFormPrivateController extends GetxController {
       case 11:
         return religionTxtController;
       case 12:
-        return postalCodoTxtController;
+        return postalCodeTxtController;
       case 13:
         return issuanceCityTxtController;
       case 14:
@@ -271,32 +293,40 @@ class RegistrationFormPrivateController extends GetxController {
       case 3:
         return InputDecoration(
             suffixIcon: suffixIcon(),
-            hintText: "Pilih Jenis Kelamin",
+            hintText:
+                "Pilih ${RegistrationFormPrivateLabel.jenisKelamin.title}",
             hintStyle: textStyleW600(fontColor: GREY));
       case 7:
         return InputDecoration(
             suffixIcon: suffixIcon(),
-            hintText: "Pilih Provinsi",
+            hintText: "Pilih ${RegistrationFormPrivateLabel.provonsi.title}",
             hintStyle: textStyleW600(fontColor: GREY));
       case 8:
         return InputDecoration(
             suffixIcon: suffixIcon(),
-            hintText: "Pilih Kota / Kabupaten",
+            hintText:
+                "Pilih ${RegistrationFormPrivateLabel.kotaKabupaten.title}",
             hintStyle: textStyleW600(fontColor: GREY));
       case 9:
         return InputDecoration(
             suffixIcon: suffixIcon(),
-            hintText: "Pilih Kecamatan",
+            hintText: "Pilih ${RegistrationFormPrivateLabel.kecamatan.title}",
             hintStyle: textStyleW600(fontColor: GREY));
       case 11:
         return InputDecoration(
             suffixIcon: suffixIcon(),
-            hintText: "Pilih Agama",
+            hintText: "Pilih ${RegistrationFormPrivateLabel.agama.title}",
             hintStyle: textStyleW600(fontColor: GREY));
       case 12:
         return InputDecoration(
             suffixIcon: suffixIcon(),
-            hintText: "Pilih Kode Pos",
+            hintText: "Pilih ${RegistrationFormPrivateLabel.kodePos.title}",
+            hintStyle: textStyleW600(fontColor: GREY));
+      case 18:
+        return InputDecoration(
+            suffixIcon: suffixIcon(),
+            hintText:
+                "Pilih ${RegistrationFormPrivateLabel.statusPerkawinan.title}",
             hintStyle: textStyleW600(fontColor: GREY));
       default:
         return null;
@@ -323,6 +353,8 @@ class RegistrationFormPrivateController extends GetxController {
         return true;
       case 15:
         return true;
+      case 18:
+        return true;
       default:
         return false;
     }
@@ -331,17 +363,55 @@ class RegistrationFormPrivateController extends GetxController {
   void Function()? onFieldTap(int i) {
     switch (i) {
       case 3:
-        return dropDownSelecting(i, "Pilih Jenis Kelamin");
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.namaLengkap.title}");
       case 7:
-        return dropDownSelecting(i, "Pilih Provinsi");
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.provonsi.title}");
       case 8:
-        return dropDownSelecting(i, "Pilih Kota / Kabupaten");
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.kotaKabupaten.title}");
+      case 9:
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.kecamatan.title}");
+      case 11:
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.agama.title}");
+      case 12:
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.kodePos.title}");
+      case 18:
+        return dropDownSelecting(
+            i, "Pilih ${RegistrationFormPrivateLabel.statusPerkawinan.title}");
       default:
         return null;
     }
   }
 
-  final List<String> genderItems = ["Laki-Laki", "Perempuan"];
+  final List<String> genderItems = [
+    "Pria",
+    "Wanita",
+  ];
+  final List<String> religionItems = [
+    "Islam",
+    "Kristen",
+    "Hindu",
+    "Budha",
+    "Khonghucu",
+  ];
+  final List<String> postalCodeItems = [
+    "123456",
+    "789101",
+    "121314",
+    "389324",
+    "947883",
+  ];
+
+  final List<String> maritalStatusItems = [
+    "Menikah",
+    "Belum Menikah",
+    "Bercerai",
+  ];
 
   List<SelectedListItem>? selectedListItem(int i) {
     switch (i) {
@@ -357,6 +427,15 @@ class RegistrationFormPrivateController extends GetxController {
       case 9:
         return List.generate(regencyList.length,
             (i) => SelectedListItem(name: regencyList[i]!.nama!));
+      case 11:
+        return List.generate(religionItems.length,
+            (i) => SelectedListItem(name: religionItems[i]));
+      case 12:
+        return List.generate(postalCodeItems.length,
+            (i) => SelectedListItem(name: postalCodeItems[i]));
+      case 18:
+        return List.generate(maritalStatusItems.length,
+            (i) => SelectedListItem(name: maritalStatusItems[i]));
       default:
         return null;
     }
@@ -368,23 +447,49 @@ class RegistrationFormPrivateController extends GetxController {
         return (item) {
           genderTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
+          onchangeForm(i)?.call(genderTxtController.text);
         };
       case 7:
         return (item) async {
+          onchangeForm(i + 1)?.call("");
+          onchangeForm(i + 2)?.call("");
           provinceTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
           await _findSubdistrict();
+          onchangeForm(i)?.call(provinceTxtController.text);
         };
       case 8:
         return (item) async {
+          onchangeForm(i + 1)?.call("");
           subdistrictTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
           await _findRegency();
+          onchangeForm(i)?.call(subdistrictTxtController.text);
         };
       case 9:
         return (item) {
+          onchangeForm(i + 1)?.call(subdistrictTxtController.text);
           regencyTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
+          onchangeForm(i)?.call(regencyTxtController.text);
+        };
+      case 11:
+        return (item) {
+          religionTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+          onchangeForm(i)?.call(religionTxtController.text);
+        };
+      case 12:
+        return (item) {
+          postalCodeTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+          onchangeForm(i)?.call(postalCodeTxtController.text);
+        };
+      case 18:
+        return (item) {
+          maritalStatusTxtController.text =
+              item.map((e) => (e as SelectedListItem).name).first;
+          onchangeForm(i)?.call(maritalStatusTxtController.text);
         };
       default:
         return null;
@@ -392,37 +497,142 @@ class RegistrationFormPrivateController extends GetxController {
   }
 
   Future<void> _findSubdistrict() async {
+    subDistrictList.value = [];
+    regencyList.value = [];
+    subdistrictTxtController.clear();
+    regencyTxtController.clear();
     var _i_ =
         provinceList.indexWhere((e) => e!.nama == provinceTxtController.text);
     var payload = provinceList[_i_]?.id;
-    var getSubDistrict = await Api().GET("kabupaten/$payload.json");
-    subDistrictList.value = List.generate(
-        (getSubDistrict as List<dynamic>).length,
+    var getSubDistrict = (await Api().GET("kota?id_provinsi=$payload")
+        as Map<String, dynamic>)['kota_kabupaten'] as List<dynamic>;
+    subDistrictList.value = List.generate((getSubDistrict).length,
         (index) => AddressModel.fromJson(getSubDistrict[index]));
   }
 
   Future<void> _findRegency() async {
+    regencyList.value = [];
+    regencyTxtController.clear();
     var _i_ = subDistrictList
         .indexWhere((e) => e!.nama == subdistrictTxtController.text);
     var payload = subDistrictList[_i_]?.id;
-    print(payload);
-    // var getRegency = await Api().GET("kabupaten/$payload.json");
-    // regencyList.value = List.generate((getRegency as List<dynamic>).length,
-    //     (index) => AddressModel.fromJson(getRegency[index]));
+    var getRegency = (await Api().GET("kecamatan?id_kota=$payload")
+        as Map<String, dynamic>)['kecamatan'] as List<dynamic>;
+    regencyList.value = List.generate((getRegency).length,
+        (index) => AddressModel.fromJson(getRegency[index]));
   }
 
   void Function()? dropDownSelecting(int i, String title) {
     return () {
       DropDownState(
         DropDown(
-          isSearchVisible: i == 3 ? false : true,
-          bottomSheetTitle: Text(title, style: textStyleW600(fontSize: 16)),
-          data: selectedListItem(i)!,
-          selectedItems: selectedItem(i),
-          enableMultipleSelection: false,
-        ),
+            isSearchVisible: (i == 3 || i == 18) ? false : true,
+            bottomSheetTitle: Text(title, style: textStyleW600(fontSize: 16)),
+            data: selectedListItem(i)!,
+            selectedItems: selectedItem(i),
+            enableMultipleSelection: false,
+            isExpanded: (i == 3 || i == 18) ? false : true),
       ).showModal(Get.context);
     };
+  }
+
+  TextInputType textInputType(int i) {
+    switch (i) {
+      case 5:
+        return TextInputType.number;
+      case 6:
+        return TextInputType.number;
+      case 16:
+        return TextInputType.number;
+      case 17:
+        return TextInputType.number;
+      default:
+        return TextInputType.text;
+    }
+  }
+
+  String? Function(String?)? onValidateForm(int i) {
+    switch (i) {
+      case 14:
+        return (val) {
+          if (val!.isEmpty) {
+            return "${RegistrationFormPrivateLabel.values[i].title} Wajib diisi";
+          } else if (!val.isValidEmail()) {
+            return "Email tidak valid";
+          } else {
+            return null;
+          }
+        };
+      case 15:
+        return (val) {
+          return null;
+        };
+      case 16:
+        return (val) {
+          if (val!.isNotEmpty && !phoneRegExp.hasMatch(val)) {
+            return "Nomer Telepon tidak valid";
+          }
+          return null;
+        };
+      case 17:
+        return (val) {
+          if (val!.isNotEmpty && val.length != 16) {
+            return "Nomor NPWP 16 digit";
+          }
+          return null;
+        };
+      default:
+        return (val) {
+          if (val!.isEmpty) {
+            return "${RegistrationFormPrivateLabel.values[i].title} Wajib diisi";
+          } else if (onlyTextRegExpAndNumber.hasMatch(val)) {
+            return "Terdapat karakter tidak valid";
+          }
+          return null;
+        };
+    }
+  }
+
+  void Function(String?)? onchangeForm(int i) {
+    switch (i) {
+      case 14:
+        return (val) {
+          if (val!.isEmpty) {
+            validationForm[i].value = false;
+          } else if (!val.isValidEmail()) {
+            validationForm[i].value = false;
+          } else {
+            validationForm[i].value = true;
+          }
+        };
+      case 16:
+        return (val) {
+          if (val!.isNotEmpty && !phoneRegExp.hasMatch(val)) {
+            validationForm[i].value = false;
+          } else {
+            validationForm[i].value = true;
+          }
+        };
+      case 17:
+        return (val) {
+          if (val!.isNotEmpty && val.length != 16) {
+            validationForm[i].value = false;
+          } else {
+            validationForm[i].value = true;
+          }
+        };
+
+      default:
+        return (val) {
+          if (val == "") {
+            validationForm[i].value = false;
+          } else if (onlyTextRegExpAndNumber.hasMatch(val!)) {
+            validationForm[i].value = false;
+          } else {
+            validationForm[i].value = true;
+          }
+        };
+    }
   }
 
   @override
@@ -440,7 +650,7 @@ class RegistrationFormPrivateController extends GetxController {
     regencyTxtController = TextEditingController();
     villageTxtController = TextEditingController();
     religionTxtController = TextEditingController();
-    postalCodoTxtController = TextEditingController();
+    postalCodeTxtController = TextEditingController();
     issuanceCityTxtController = TextEditingController();
     emailTxtController = TextEditingController();
     phoneNumberTxtController =
@@ -455,15 +665,42 @@ class RegistrationFormPrivateController extends GetxController {
   @override
   void onReady() async {
     _mController.startProgressAnim();
-    var _province = await Api().GET("provinsi.json");
-    provinceList.value = List.generate((_province as List<dynamic>).length,
-        (index) => AddressModel.fromJson(_province[index]));
+    var _province = (await Api().GET("provinsi")
+        as Map<String, dynamic>)['provinsi'] as List<dynamic>;
+    provinceList.value = List.generate(
+        _province.length, (index) => AddressModel.fromJson(_province[index]));
     super.onReady();
   }
 
-  void Function() test() {
+  void Function()? next() {
+    if (validationForm.contains(RxBool(false))) {
+      return null;
+    }
     return () async {
-      print(subDistrictList.map((element) => element?.toJson()).toList());
+      var _payload = {
+        "full_name": fullNameTxtController.text,
+        "pob": pobTxtController.text,
+        "dob": dobTxtController.text,
+        "gender": genderTxtController.text,
+        "address": addressTxtController.text,
+        "rt": rtTxtController.text,
+        "rw": rwTxtController.text,
+        "province": provinceTxtController.text,
+        "subdistrict": subdistrictTxtController.text,
+        "regency": regencyTxtController.text,
+        "village": villageTxtController.text,
+        "religion": religionTxtController.text,
+        "postal_code": postalCodeTxtController.text,
+        "issuance_city": issuanceCityTxtController.text,
+        "email": emailTxtController.text,
+        "phone": phoneNumberTxtController.text,
+        "phone_house": phoneHouseTxtController.text,
+        "npwp": npwpTxtController.text,
+        "marital_status": maritalStatusTxtController.text,
+        "mother_name": mothersNameTxtController.text
+      };
+      _mController.setPrivateFormData(_payload);
+      await Get.toNamed(ROUTE.registrationFormJobDetail.name);
     };
   }
 }

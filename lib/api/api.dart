@@ -3,7 +3,7 @@ import 'package:mobilenew/widget/widgets.dart';
 
 class Api {
   final BaseOptions _baseOptions = BaseOptions(
-      baseUrl: "https://ibnux.github.io/data-indonesia/",
+      baseUrl: "https://dev.farizdotid.com/api/daerahindonesia/",
       connectTimeout: const Duration(seconds: 30),
       contentType: "application/json");
   Future<dynamic> GET(String endpoint) async {
