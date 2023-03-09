@@ -105,6 +105,7 @@ class RegistrationFormJobDetailController extends GetxController {
     "persiapan dana darurat",
     "persiapan dana liburan",
     "dana pendidikan",
+    "dana kematian",
     "lainnya",
   ];
 
@@ -168,16 +169,31 @@ class RegistrationFormJobDetailController extends GetxController {
     }
   }
 
+  double _initialExpandSizeDropdown(int i) {
+    switch (selectedListItem(i)!.length) {
+      case 2:
+        return 0.2;
+      case 3:
+        return 0.3;
+      case 4:
+        return 0.35;
+      case 5:
+        return 0.45;
+      default:
+        return 0.7;
+    }
+  }
+
   void Function()? dropDownSelecting(int i, String title) {
     return () {
       DropDownState(
         DropDown(
-            isSearchVisible: true,
+            isSearchVisible: _initialExpandSizeDropdown(i).isGreaterThan(0.45),
             bottomSheetTitle: Text(title, style: textStyleW600(fontSize: 16)),
             data: selectedListItem(i)!,
             selectedItems: selectedItem(i),
             enableMultipleSelection: false,
-            isExpanded: selectedListItem(i)!.length <= 4 ? false : true),
+            isExpanded: _initialExpandSizeDropdown(i).isGreaterThan(0.45)),
       ).showModal(Get.context);
     };
   }

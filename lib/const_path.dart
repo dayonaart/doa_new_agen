@@ -10,3 +10,4 @@ String flipCameraButtonAssets = "assets/flip_button.png";
 String openingAccountAssets = "assets/opening_account.png";
 String iAssets = "assets/i.png";
 String penAssets = "assets/pen.png";
+String takeFaceAndSelfie = "assets/take_face_and_selfie.png";

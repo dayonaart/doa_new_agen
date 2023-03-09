@@ -545,3 +545,27 @@ extension FormJobTitle on RegistrationFormJobDetailLabel {
     }
   }
 }
+
+enum RegistrationFormOfficeBranchLabel {
+  provinsi,
+  kotaKabupaten,
+  kantorCabang,
+  alamatKantorCabang
+}
+
+extension FormOfficeBranchTitle on RegistrationFormOfficeBranchLabel {
+  String get title {
+    switch (this) {
+      case RegistrationFormOfficeBranchLabel.provinsi:
+        return "Provinsi";
+      case RegistrationFormOfficeBranchLabel.kotaKabupaten:
+        return "Kota / Kabupaten";
+      case RegistrationFormOfficeBranchLabel.kantorCabang:
+        return "Kantor Cabang";
+      case RegistrationFormOfficeBranchLabel.alamatKantorCabang:
+        return "Alamat Kantor Cabang";
+      default:
+        return "";
+    }
+  }
+}

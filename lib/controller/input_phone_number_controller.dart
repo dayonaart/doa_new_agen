@@ -60,7 +60,7 @@ class InputPhoneNumberController extends GetxController {
             data: selectedListItem,
             selectedItems: (s) => selectedItem(s.map((e) => e).toList()),
             enableMultipleSelection: false,
-            isExpanded: true),
+            isExpanded: false),
       ).showModal(context);
     };
   }

@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:mobilenew/pages/account_type.dart';
+import 'package:mobilenew/pages/face_and_selfie_verification.dart';
 import 'package:mobilenew/pages/input_phone_number.dart';
 import 'package:mobilenew/pages/ktp_registration.dart';
 import 'package:mobilenew/pages/onboarding.dart';
@@ -25,6 +26,8 @@ enum ROUTE {
   registrationFormPrivate,
   registrationFormJobDetail,
   registrationFormOfficeBranch,
+  faceAndSelfieVerification,
+  selfieAndKtpVerification,
 }
 
 extension Page on ROUTE {
@@ -54,6 +57,8 @@ extension Page on ROUTE {
         return '/registrationFormJobDetail';
       case ROUTE.registrationFormOfficeBranch:
         return '/registrationFormOfficeBranch';
+      case ROUTE.faceAndSelfieVerification:
+        return '/faceAndSelfieVerification';
       default:
         return "";
     }
@@ -81,5 +86,8 @@ List<GetPage> get routePage {
     GetPage(
         name: ROUTE.registrationFormOfficeBranch.name,
         page: () => RegistrationFormOfficeBranch()),
+    GetPage(
+        name: ROUTE.faceAndSelfieVerification.name,
+        page: () => FaceAndAndSelfieVerication()),
   ];
 }

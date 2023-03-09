@@ -40,11 +40,16 @@ dependencies:
   dio: ^5.0.1
   carousel_slider: ^4.2.1 
   drop_down_list:
-    git:
-      url : https://github.com/dayonaart/drop_down_list
+    path : /home/dayona/Desktop/drop_down_list
+
+  # drop_down_list:
+  #   git:
+  #     url : https://github.com/dayonaart/drop_down_list
   camera: ^0.10.3+2
   intl: ^0.18.0
   screenshot: ^1.3.0
+  captcha_solver: ^1.0.4
+  webview_flutter_plus: ^0.3.0+2
 
 dev_dependencies:
   flutter_test:

@@ -42,7 +42,7 @@ class RegistrationFormPrivateController extends GetxController {
       rtTxtController, //5
       rwTxtController, //6
       provinceTxtController, //7
-      subdistrictTxtController, //8
+      subDistrictTxtController, //8
       regencyTxtController, //9
       villageTxtController, //10
       religionTxtController, //11
@@ -60,7 +60,7 @@ class RegistrationFormPrivateController extends GetxController {
       case true:
         return Text(
           RegistrationFormPrivateLabel.values[i].title,
-          style: textStyleW600(fontSize: 14, fontColor: GREY),
+          style: textStyleW600(fontSize: 14),
         );
       case false:
         return Text.rich(TextSpan(children: [
@@ -96,7 +96,7 @@ class RegistrationFormPrivateController extends GetxController {
       case 7:
         return provinceTxtController;
       case 8:
-        return subdistrictTxtController;
+        return subDistrictTxtController;
       case 9:
         return regencyTxtController;
       case 10:
@@ -307,14 +307,14 @@ class RegistrationFormPrivateController extends GetxController {
       case 8:
         return (item) async {
           onChangeForm(i + 1)?.call("");
-          subdistrictTxtController.text =
+          subDistrictTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
           await _findRegency();
-          onChangeForm(i)?.call(subdistrictTxtController.text);
+          onChangeForm(i)?.call(subDistrictTxtController.text);
         };
       case 9:
         return (item) {
-          onChangeForm(i + 1)?.call(subdistrictTxtController.text);
+          onChangeForm(i + 1)?.call(subDistrictTxtController.text);
           regencyTxtController.text =
               item.map((e) => (e as SelectedListItem).name).first;
           onChangeForm(i)?.call(regencyTxtController.text);
@@ -342,16 +342,32 @@ class RegistrationFormPrivateController extends GetxController {
     }
   }
 
+  double _initialExpandSizeDropdown(int i) {
+    switch (selectedListItem(i)!.length) {
+      case 2:
+        return 0.2;
+      case 3:
+        return 0.3;
+      case 4:
+        return 0.35;
+      case 5:
+        return 0.45;
+      default:
+        return 0.7;
+    }
+  }
+
   void Function()? dropDownSelecting(int i, String title) {
     return () {
       DropDownState(
         DropDown(
-            isSearchVisible: (i == 3 || i == 18) ? false : true,
+            isSearchVisible: _initialExpandSizeDropdown(i).isGreaterThan(0.45),
             bottomSheetTitle: Text(title, style: textStyleW600(fontSize: 16)),
             data: selectedListItem(i)!,
             selectedItems: selectedItem(i),
             enableMultipleSelection: false,
-            isExpanded: selectedListItem(i)!.length <= 4 ? false : true),
+            initialExpandSize: _initialExpandSizeDropdown(i),
+            isExpanded: _initialExpandSizeDropdown(i).isGreaterThan(0.45)),
       ).showModal(Get.context);
     };
   }
@@ -466,7 +482,7 @@ class RegistrationFormPrivateController extends GetxController {
     rtTxtController = TextEditingController();
     rwTxtController = TextEditingController();
     provinceTxtController = TextEditingController();
-    subdistrictTxtController = TextEditingController();
+    subDistrictTxtController = TextEditingController();
     regencyTxtController = TextEditingController();
     villageTxtController = TextEditingController();
     religionTxtController = TextEditingController();
@@ -485,7 +501,7 @@ class RegistrationFormPrivateController extends GetxController {
   Future<void> _findSubdistrict() async {
     subDistrictList.value = [];
     regencyList.value = [];
-    subdistrictTxtController.clear();
+    subDistrictTxtController.clear();
     regencyTxtController.clear();
     var _i_ =
         provinceList.indexWhere((e) => e!.nama == provinceTxtController.text);
@@ -500,7 +516,7 @@ class RegistrationFormPrivateController extends GetxController {
     regencyList.value = [];
     regencyTxtController.clear();
     var _i_ = subDistrictList
-        .indexWhere((e) => e!.nama == subdistrictTxtController.text);
+        .indexWhere((e) => e!.nama == subDistrictTxtController.text);
     var payload = subDistrictList[_i_]?.id;
     var getRegency = (await Api().GET("kecamatan?id_kota=$payload")
         as Map<String, dynamic>)['kecamatan'] as List<dynamic>;
@@ -532,7 +548,7 @@ class RegistrationFormPrivateController extends GetxController {
         "rt": rtTxtController.text,
         "rw": rwTxtController.text,
         "province": provinceTxtController.text,
-        "subdistrict": subdistrictTxtController.text,
+        "subdistrict": subDistrictTxtController.text,
         "regency": regencyTxtController.text,
         "village": villageTxtController.text,
         "religion": religionTxtController.text,

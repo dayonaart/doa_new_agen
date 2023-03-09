@@ -190,7 +190,6 @@ class TakeCameraKtpController extends GetxController
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     camController?.dispose();
-    camController?.stopImageStream();
     super.dispose();
   }
 
