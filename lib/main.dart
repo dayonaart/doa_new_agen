@@ -14,7 +14,7 @@ Future<void> main() async {
       transitionDuration: const Duration(milliseconds: 500),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'montserrat'),
-      initialRoute: ROUTE.faceAndSelfieVerification.name,
+      initialRoute: ROUTE.onBoarding.name,
       getPages: routePage,
       unknownRoute: GetPage(
         name: '/notfound',
